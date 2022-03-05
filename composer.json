@@ -1,0 +1,16 @@
+{
+    "name": "kovas/php_composer",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Kovas\\PhpComposer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Balázs Kovásznai",
+            "email": "balazskovasznai@edu.bme.hu"
+        }
+    ],
+    "require": {}
+}
