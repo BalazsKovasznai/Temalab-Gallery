@@ -13,7 +13,7 @@ class LoginScreenTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_home_screen()
     {
         $response = $this->get('/home');
 
