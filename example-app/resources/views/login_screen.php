@@ -3,7 +3,7 @@
     <body>
 
         <form action="login_screen.php" method="get">
-            <input type="button" name="Login" value="Login" onclick="location.href='/login'">
+            <input type="button" name="Login" value="Login" onclick="location.href='/folders'">
         </form>
 
     </body>
