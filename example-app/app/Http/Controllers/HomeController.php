@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('main_screen');
+        return view('home_screen');
     }
 
     /**
