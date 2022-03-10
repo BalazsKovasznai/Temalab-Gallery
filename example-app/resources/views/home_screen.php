@@ -1,12 +1,32 @@
 <?php ?>
 
 <html>
+    <head>
+        <title>Home Screen</title>
+        <style>
+            button
+            {
+                font-size: 40px;
+                padding: 10px;
+                border-radius: 10px;
+                margin: 20px;
+            }
+            #container
+            {
+                position: absolute;
+                margin: 0;
+                top: 50%;
+                left: 50%;
+                -ms-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
+            }
+        </style>
+    </head>
     <body>
-
-        <form action="home_screen.php" method="get">
-                <input type="button" name="Login" value="Login" onclick="location.href='/login'">
-                <input type="button" name="Registration" value="Registration" onclick="location.href='/registration'">
-        </form>
+        <div id="container">
+            <button id="loginButton" onclick="location.href='/login'"> Login</button>
+            <button id="registrationButton" onclick="location.href='/registration'"> Registration</button>
+        </div>
 
     </body>
 
