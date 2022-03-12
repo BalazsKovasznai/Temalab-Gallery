@@ -19,4 +19,14 @@ class RegistrationScreenTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_user_register()
+{
+    $response = $this->post('/register', [
+        'Username' => 'un',
+        'Password' => 'pw',
+
+    ]);
+    $response->assertRedirect('/folders');
+}
 }

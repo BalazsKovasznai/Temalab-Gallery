@@ -21,4 +21,6 @@ class RegistrationTest extends DuskTestCase
                 ->assertPathIs('/registration');
         });
     }
+
+
 }

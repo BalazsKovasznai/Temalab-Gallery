@@ -21,13 +21,13 @@
     </style>
 </head>
 <body>
-
+    <form method="post" action="/folders">
     <div id="textBoxes">
         <input type="text" name="Username" placeholder="Username">
         <input type="password" name="Password" placeholder="Password">
-        <button id="submitButton" onclick="location.href='/folders'"> Registration </button>
+        <button type="submit" class="btn btn-primary"> Registration </button>
     </div>
-
+    </form>
 </body>
 
 

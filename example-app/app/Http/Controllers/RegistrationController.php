@@ -13,7 +13,7 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-        return view('registration_screen');
+        //
     }
 
     /**
@@ -23,7 +23,7 @@ class RegistrationController extends Controller
      */
     public function create()
     {
-        //
+        return view('registration_screen');
     }
 
     /**
@@ -34,7 +34,16 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       /* $this->validate(request(), [
+            'name' => 'required',
+            'password' => 'required'
+        ]);
+
+        $user = User::create(request(['name',  'password']));
+
+        auth()->login($user); */
+
+        return view('folders_screen');
     }
 
     /**

@@ -18,5 +18,7 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index' ] );
 Route::get( '/home', [\App\Http\Controllers\HomeController::class, 'index' ] );
 
 Route::get( '/login', [\App\Http\Controllers\LoginController::class, 'index' ] );
-Route::get( '/registration', [\App\Http\Controllers\RegistrationController::class, 'index' ] );
+Route::get( '/registration', [\App\Http\Controllers\RegistrationController::class, 'create' ] );
+Route::post('registration', [\App\Http\Controllers\RegistrationController::class, 'store' ] );
+
 Route::get( '/folders', [\App\Http\Controllers\FoldersController::class, 'index' ] );
