@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index' ] );
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get( '/home', [\App\Http\Controllers\HomeController::class, 'index' ] );
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get( '/login', [\App\Http\Controllers\LoginController::class, 'index' ] );
-Route::get( '/registration', [\App\Http\Controllers\RegistrationController::class, 'create' ] );
-Route::post('registration', [\App\Http\Controllers\RegistrationController::class, 'store' ] );
-
-Route::get( '/folders', [\App\Http\Controllers\FoldersController::class, 'index' ] );
+require __DIR__.'/auth.php';

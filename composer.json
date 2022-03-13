@@ -12,5 +12,7 @@
             "email": "balazskovasznai@edu.bme.hu"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "laravel/breeze": "^1.8"
+    }
 }
