@@ -3,6 +3,7 @@
 <html>
     <head>
         <title>Home Screen</title>
+
         <style>
             button
             {
@@ -23,9 +24,11 @@
         </style>
     </head>
     <body>
+
         <div id="container">
-            <button id="loginButton" onclick="location.href='/login'"> Login</button>
-            <button id="registrationButton" onclick="location.href='/register'"> Registration</button>
+            Gallery
+            <button name="loginButton" onclick="location.href='/login'"> Login</button>
+            <button name="registrationButton" name="registrationButton" onclick="location.href='/register'"> Registration</button>
         </div>
 
     </body>

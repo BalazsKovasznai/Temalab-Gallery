@@ -15,18 +15,11 @@ class RegistrationScreenTest extends TestCase
      */
     public function test_example()
     {
-        $response = $this->get('/registration');
+        $response = $this->get('/register');
 
         $response->assertStatus(200);
     }
 
-    public function test_user_register()
-{
-    $response = $this->post('/register', [
-        'Username' => 'un',
-        'Password' => 'pw',
 
-    ]);
-    $response->assertRedirect('/folders');
-}
+
 }

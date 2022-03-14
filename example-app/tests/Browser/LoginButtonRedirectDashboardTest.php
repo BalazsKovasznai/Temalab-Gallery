@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class FoldersTest extends DuskTestCase
+class LoginButtonRedirectDashboardTest extends DuskTestCase
 {
     /**
      * A Dusk test example.

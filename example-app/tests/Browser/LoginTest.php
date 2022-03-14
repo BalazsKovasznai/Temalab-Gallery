@@ -17,8 +17,8 @@ class LoginTest extends DuskTestCase
     public function test_home_login_button()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/home')
-                ->press('Login')
+            $browser->visit('/')
+                ->press('loginButton')
             ->assertPathIs('/login');
         });
     }
