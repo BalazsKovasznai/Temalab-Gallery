@@ -6,20 +6,20 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class FoldersTest extends DuskTestCase
+class FolderButtonRedirectTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
      *
      * @return void
      */
-    public function test_login_loggedinfolders_button()
+    public function testExample()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                ->press('loginButton')
-                ->assertPathIs('/folders');
+            $browser->visit('/dashboard')
+                ->press('myfolder1')
+                ->assertPathIs('/fmyfolder1');
         });
+
     }
 }
-

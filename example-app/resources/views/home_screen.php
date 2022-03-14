@@ -25,7 +25,7 @@
     <body>
         <div id="container">
             <button id="loginButton" onclick="location.href='/login'"> Login</button>
-            <button id="registrationButton" onclick="location.href='/registration'"> Registration</button>
+            <button id="registrationButton" onclick="location.href='/register'"> Registration</button>
         </div>
 
     </body>
