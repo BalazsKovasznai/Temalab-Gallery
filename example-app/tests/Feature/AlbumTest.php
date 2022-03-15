@@ -21,4 +21,7 @@ class  AlbumTest extends TestCase
         $response = $this->get('/albums');
         $response->assertSee($album->title);
     }
+
+
+
 }

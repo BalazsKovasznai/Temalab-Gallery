@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -14,11 +15,5 @@ class LoginButtonRedirectTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
-    {
 
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
 }
