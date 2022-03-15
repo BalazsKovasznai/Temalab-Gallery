@@ -22,5 +22,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/albums', [\App\Http\Controllers\AlbumController::class,'index']);
+Route::get('/albums/1 ', [\App\Http\Controllers\PhotoController::class,'index']);
 
 require __DIR__.'/auth.php';

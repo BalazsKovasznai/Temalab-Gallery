@@ -1,11 +1,11 @@
 <?php
 
 namespace Tests\Browser;
-use Illuminate\Foundation\Testing\WithFaker;
+
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use phpDocumentor\Reflection\DocBlock\Tags\Reference\Url;
 use Tests\DuskTestCase;
-
 
 class FolderButtonRedirectTest extends DuskTestCase
 {
@@ -16,11 +16,13 @@ class FolderButtonRedirectTest extends DuskTestCase
      */
     public function testExample()
     {
-        $this->browse(function (Browser $browser) {
-            $browser -> loginAs(1)
+        $this->browse(function ($browser) {
+            $browser->loginAs(1)
                 ->visit('/dashboard')
-                ->press('myalbums')
+            ->press('myalbums')
                 ->assertPathIs('/myalbums');
+
+
         });
 
     }

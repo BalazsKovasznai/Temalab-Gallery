@@ -7,7 +7,8 @@
         <style>
             button
             {
-                font-size: 40px;
+                background-color: #2ca02c;
+                font-size: 30px;
                 padding: 10px;
                 border-radius: 10px;
                 margin: 20px;
@@ -26,10 +27,11 @@
     <body>
 
         <div id="container">
-            Gallery
             <button name="loginButton" onclick="location.href='/login'"> Login</button>
-            <button name="registrationButton" name="registrationButton" onclick="location.href='/register'"> Registration</button>
+            <button name="registrationButton" onclick="location.href='/register'"> Registration</button>
+            Gallery
         </div>
+
 
     </body>
 

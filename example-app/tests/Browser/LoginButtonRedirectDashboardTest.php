@@ -13,12 +13,14 @@ class LoginButtonRedirectDashboardTest extends DuskTestCase
      *
      * @return void
      */
-    public function test_login_loggedinfolders_button()
+    public function test_user_can_see_dashboard()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                ->press('loginButton')
-                ->assertPathIs('/folders');
+        $this->browse(function ($browser) {
+            $browser->loginAs(1)
+                ->press('Log In')
+                ->assertPathIs('/dashboard');
+
+
         });
     }
 }

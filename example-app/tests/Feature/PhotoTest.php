@@ -6,19 +6,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class  AlbumTest extends TestCase
+class PhotoTest extends TestCase
 {
     /**
      * A basic feature test example.
      *
      * @return void
      */
-
-    public function test_user_can_see_new_album()
+    public function test_example()
     {
-        $album = \App\Models\Album::factory()->create();
+        $photo = \App\Models\Photo::factory()->create();
 
-        $response = $this->get('/albums');
-        $response->assertSee($album->title);
+        $response = $this->get('/albums/1');
+        $response->assertSee($photo->title);
     }
 }
