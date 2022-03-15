@@ -21,8 +21,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/albums', [\App\Http\Controllers\AlbumController::class,'index']);
-Route::resource('albums', \App\Http\Controllers\AlbumController::class);
+Route::get('/albums', [\App\Http\Controllers\AlbumsController::class,'index']);
+Route::resource('albums', \App\Http\Controllers\AlbumsController::class);
 Route::get('/albums/1 ', [\App\Http\Controllers\PhotoController::class,'index']);
+Route::get('/albums/create',[\App\Http\Controllers\AlbumsController::class,'create']);
+Route::post('/albums/store',[\App\Http\Controllers\AlbumsController::class,'store'])->name('album-store');
+
 
 require __DIR__.'/auth.php';
