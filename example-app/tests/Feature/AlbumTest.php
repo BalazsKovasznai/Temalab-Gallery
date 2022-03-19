@@ -19,7 +19,7 @@ class  AlbumTest extends TestCase
         $album = \App\Models\Album::factory()->create();
 
         $response = $this->get('/albums');
-        $response->assertSee($album->title);
+        $response->assertSee($album->name);
     }
 
 

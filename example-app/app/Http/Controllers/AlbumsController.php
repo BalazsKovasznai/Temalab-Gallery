@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AlbumsController extends Controller
 {
@@ -53,6 +54,7 @@ class AlbumsController extends Controller
         $filenameToStore=$filename . '_' . time() . '_' . $extension;
 
         $request->file('cover-image')->storeAs('public/album_covers',$filenameToStore);
+
 
         $album=new Album();
         $album->name=$request->input('name');
