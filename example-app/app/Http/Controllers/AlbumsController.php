@@ -14,8 +14,9 @@ class AlbumsController extends Controller
      */
     public function index()
     {
-        $albums = Album::paginate();
-        return view('albums.index', compact('albums'));
+        //$albums = Album::paginate();
+        $albums=Album::get();
+        return view('albums.index', compact('albums'))->with('albums',$albums);
     }
 
     /**
@@ -78,7 +79,8 @@ class AlbumsController extends Controller
      */
     public function show($id)
     {
-        //
+        $album=Album::with('photos')->find($id);
+            return view('albums.show')->with('album',$album);
     }
 
     /**

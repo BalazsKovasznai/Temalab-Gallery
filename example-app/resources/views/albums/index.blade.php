@@ -1,18 +1,33 @@
-
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semi-bold text-xl text-green-800 leading-tight ">
-            {{ __('My albums') }}
-        </h2>
     </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-green-500 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-green-500 border-b border-gray-200">
-
+    <xslot name="body">
+        <div class="container" h>
+            @if(count($albums)>0)
+                <div class="row" >
+                    @foreach($albums as $album)
+                        <div class="col" >
+                            <div class="card shadow-sm">
+                                <img src="/storage/album_covers/{{ $album->cover_image }}" alt="{{ $album->cover_image }}" height="200px">
+                                <div class="card-body">
+                                    <p class="card-text">{{$album->desciption}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a href="{{route('album-show',$album->id)}}" class="btn btn-sm btn-outline-secondary">View</a>
+                                        </div>
+                                        <small class="text-muted">{{$album->name}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-            </div>
+            @else
+                <h3>No albums yet.</h3>
+            @endif
         </div>
-    </div>
+    </xslot>
+
+
+
 </x-app-layout>
