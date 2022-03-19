@@ -32,5 +32,6 @@ Route::get('/photos/create/{albumId}',[\App\Http\Controllers\PhotosController::c
 Route::post('/photos/store',[\App\Http\Controllers\PhotosController::class,'store'])->name('photo-store');
 Route::get('/photos/{id}',[\App\Http\Controllers\PhotosController::class,'show'])->name('photo-show');
 Route::delete('/photos/{id}',[\App\Http\Controllers\PhotosController::class,'destroy'])->name('photo-destroy');
+Route::delete('/albums/{id}',[\App\Http\Controllers\AlbumsController::class,'destroy'])->name('album-destroy');
 
 require __DIR__.'/auth.php';

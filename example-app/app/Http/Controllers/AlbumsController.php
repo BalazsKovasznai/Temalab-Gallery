@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumsController extends Controller
 {
@@ -114,6 +115,10 @@ class AlbumsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $album=Album::find ($id);
+        if(Storage::delete('/public/storage/albums/'.$album->album_id.'/'.$album->album)) {
+            $album->delete();
+            return redirect('/albums')->with('success', 'Album deleted successfully');
+        }
     }
 }

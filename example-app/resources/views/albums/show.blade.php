@@ -16,6 +16,11 @@
                                     <a href="{{ route('photo-create',$album->id ) }}" class="btn btn-primary my-2">Upload Photo</a>
                                     <a href="/dashboard" class="btn btn-secondary my-2">Go Back</a>
                                 </p>
+                                <form action="{{route('album-destroy',$album->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" name="button" class="btn btn-danger float-right">Delete album</button>
+                                </form>
                             </div>
                         </div>
                     </section>
