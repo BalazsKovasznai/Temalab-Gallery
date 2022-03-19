@@ -19,7 +19,8 @@ class AlbumFactory extends Factory
         return [
             'name'=>$this->faker->name,
             'description'=>$this->faker->name,
-            'cover_image'=>$this->faker->image
+            'cover_image'=>$this->faker->image,
+            'ulby'=>13
         ];
     }
 }
