@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -33,5 +34,15 @@ class  AlbumTest extends TestCase
         $response->assertSee('Upload Photo');
     }
 
+    public function test_new_user_can_see_no_albums_yet()
+    {
+        $user = User::factory()->create();
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+        $response = $this->get('/albums');
+        $response->assertSee('No albums yet.');
+    }
 
 }
