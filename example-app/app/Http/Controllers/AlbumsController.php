@@ -55,11 +55,14 @@ class AlbumsController extends Controller
 
         $request->file('cover-image')->storeAs('public/album_covers',$filenameToStore);
 
+        $user=Auth::id();
+
 
         $album=new Album();
         $album->name=$request->input('name');
         $album->description=$request->input('description');
         $album->cover_image=$filenameToStore;
+        $album->ulby=$user;
         $album->save();
 
         return redirect('/albums')->with('success','Album created succesfully!');

@@ -6,6 +6,7 @@
             @if(count($albums)>0)
                 <div class="row" >
                     @foreach($albums as $album)
+                        @if($album->ulby==auth()->id())
                             <div class="col" >
                                 <div class="card shadow-sm">
                                     <img src="/storage/album_covers/{{ $album->cover_image }}" alt="{{ $album->cover_image }}" height="200px">
@@ -20,6 +21,7 @@
                                     </div>
                                 </div>
                             </div>
+                        @endif
                     @endforeach
                 </div>
             @else
