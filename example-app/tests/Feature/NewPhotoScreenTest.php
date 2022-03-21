@@ -29,9 +29,7 @@ class NewPhotoScreenTest extends TestCase
     public function test_user_can_see_the_fields()
     {
         $response = $this->get('/photos/create/1');
-        $response->assertSee('Title');
-        $response->assertSee('Description');
-        $response->assertSee('Photo');
+        $response->assertSeeInOrder(['Title', 'Description', 'Photo']);
     }
 
 }

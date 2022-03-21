@@ -16,7 +16,13 @@ class CreateAlbumScreenTest extends TestCase
     public function test_example()
     {
         $response = $this->get('/albums/create');
-
         $response->assertStatus(200);
     }
+
+    public function test_user_can_see_the_form()
+    {
+        $response = $this->get('/albums/create');
+        $response->assertSeeInOrder(['Name', 'Description', 'Cover image']);
+    }
+
 }

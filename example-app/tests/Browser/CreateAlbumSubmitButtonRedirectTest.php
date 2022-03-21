@@ -44,7 +44,7 @@ class CreateAlbumSubmitButtonRedirectTest extends DuskTestCase
                 ->type('description', 'asd')
                 ->attach('cover-image', 'C:\Users\Ildiko\Desktop\virag.jpg')
                 ->press('Submit')
-                ->assertPathIs('/albums');
+                ->assertPathIs('/albums/store');
         });
     }
 }

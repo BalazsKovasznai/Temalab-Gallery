@@ -34,6 +34,12 @@ class  AlbumTest extends TestCase
         $response->assertSee('Upload Photo');
     }
 
+    public function test_user_can_see_share()
+    {
+        $response = $this->get('/albums/1');
+        $response->assertSee('Share');
+    }
+
     public function test_new_user_can_see_no_albums_yet()
     {
         $user = User::factory()->create();
