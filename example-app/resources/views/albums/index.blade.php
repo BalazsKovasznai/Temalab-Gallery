@@ -2,8 +2,8 @@
     <x-slot name="header">
     </x-slot>
     <xslot name="body">
-        <div class="container" h>
-            @if(count($albums)>0)
+        <div class="container" >
+            @if($ownAlbumExist)
                 <div class="row" >
                     @foreach($albums as $album)
                         @if($album->ulby==auth()->id())

@@ -18,7 +18,12 @@ class AlbumsController extends Controller
     {
         //$albums = Album::paginate();
         $albums=Album::get();
-        return view('albums.index', compact('albums'))->with('albums',$albums);
+        foreach ($albums as $album){
+            if($album->ulby==auth()->id()){
+                return view('albums.index', compact('albums'))->with('albums',$albums)->with('ownAlbumExist', true);
+            }
+        }
+        return view('albums.index', compact('albums'))->with('albums',$albums)->with('ownAlbumExist', false);
     }
 
     /**
