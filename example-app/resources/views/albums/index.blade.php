@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
+
     </x-slot>
     <xslot name="body">
         <div class="container" >
@@ -9,7 +10,7 @@
                         @if($album->ulby==auth()->id())
                             <div class="col" >
                                 <div class="card shadow-sm">
-                                    <img src="/storage/album_covers/{{ $album->cover_image }}" alt="{{ $album->cover_image }}" height="200px">
+                                    <img src="/storage/album_covers/{{ $album->cover_image }}" alt="{{ $album->cover_image }}" height="300" width="300">
                                     <div class="card-body">
                                         <p class="card-text">{{$album->desciption}}</p>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -25,7 +26,7 @@
                     @endforeach
                 </div>
             @else
-                <h3>No albums yet.</h3>
+                <div>No albums yet.</div>
             @endif
         </div>
     </xslot>

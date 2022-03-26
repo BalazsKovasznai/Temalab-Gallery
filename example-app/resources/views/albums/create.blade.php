@@ -1,6 +1,11 @@
 @extends('layouts.app1')
 
 @section('content')
+    <div name="logo">
+        <a href="/">
+            <x-application-logo />
+        </a>
+    </div>
     <div class="container">
         <h2>Create a new album</h2>
             <form method="post" action="{{ route('album-store') }}" enctype="multipart/form-data">
@@ -15,7 +20,7 @@
                 </div>
                 <div class="form-group">
                     <label for="cover-image">Cover image</label>
-                    <input type="file" class="form-control" name="cover-image" id="cover-image">
+                    <input type="file" class="form-control" name="cover-image" id="cover-image" height="200px">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
