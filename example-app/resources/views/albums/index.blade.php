@@ -1,6 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-
+        <h2 class="font-semi-bold text-xl text-green-800 leading-tight ">
+            {{ __('My Albums') }}
+        </h2>
     </x-slot>
     <xslot name="body">
         <div class="container" >

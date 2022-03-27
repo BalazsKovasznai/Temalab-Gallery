@@ -1,6 +1,9 @@
 
 <x-app-layout>
     <x-slot name="header">
+        <h2 class="font-semi-bold text-xl text-green-800 leading-tight ">
+            {{ __($album->name) }}
+        </h2>
     </x-slot>
 
     <div class="py-12">
@@ -14,7 +17,7 @@
                                 <p class="lead text-muted">{{$album->description}}</p>
                                 <p>
                                     <a href="{{ route('photo-create',$album->id ) }}" class="btn btn-primary my-2">Upload Photo</a>
-                                    <a href="/dashboard" class="btn btn-secondary my-2">Go Back</a>
+                                    <a href="/albums" class="btn btn-secondary my-2">Go Back</a>
                                 </p>
                                 <form action="{{route('album-destroy',$album->id)}}" method="post">
                                     @csrf
