@@ -12,20 +12,12 @@
                         <form method="post" action="{{ route('album-store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group p-4">
-                                <div>
-                                    <label for="name">Name</label>
-                                </div>
-                                <div>
-                                    <input type="text" class="form-control rounded-md w-full sm:max-w-md" name=name id="name" placeholder="Enter name">
-                                </div>
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control rounded-md w-full sm:max-w-md" name=name id="name" placeholder="Enter name">
                             </div>
                             <div class="form-group px-4">
-                                <div>
-                                    <label for="description">Description</label>
-                                </div>
-                                <div>
-                                    <input type="text" class="form-control rounded-md w-full sm:max-w-md" name="description" id="description" placeholder="Enter description">
-                                </div>
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control rounded-md w-full sm:max-w-md" name="description" id="description" placeholder="Enter description">
                             </div>
                             <div class="form-group p-4">
                                 <div>
