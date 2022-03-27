@@ -940,11 +940,23 @@ select {
 .fill-current {
   fill: currentColor;
 }
+
+.fit-witdh {
+    width: fit-content;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
 .p-6 {
   padding: 1.5rem;
+}
+.p-4 {
+    padding: 1rem;
+}
+.px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 .px-4 {
   padding-left: 1rem;
@@ -970,13 +982,13 @@ select {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+.py-3{
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
 }
 .py-6 {
   padding-top: 1.5rem;
