@@ -18,7 +18,7 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->press('loginButton')
+                ->press('@Login')
             ->assertPathIs('/login');
         });
     }

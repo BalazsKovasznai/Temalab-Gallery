@@ -19,8 +19,8 @@ class FolderButtonRedirectTest extends DuskTestCase
         $this->browse(function ($browser) {
             $browser->loginAs(1)
                 ->visit('/dashboard')
-            ->press('myalbums')
-                ->assertPathIs('/myalbums');
+             ->clickLink('My Albums')
+                ->assertPathIs('/albums');
 
 
         });

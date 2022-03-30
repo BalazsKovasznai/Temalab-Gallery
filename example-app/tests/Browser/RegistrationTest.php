@@ -17,7 +17,7 @@ class RegistrationTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->press('registrationButton')
+                ->press('@Register')
                 ->assertPathIs('/register');
         });
     }

@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center justify-center p-4">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-emerald-100 border border-transparent rounded-md
+                            <button dusk="Submit" type="submit" class="inline-flex items-center px-4 py-2 bg-emerald-100 border border-transparent rounded-md
                               font-semibold text-small text-black uppercase tracking-widest hover:bg-green-700 active:bg-gray-900
                                focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition
                                ease-in-out duration-150 ml-3">Submit</button>

@@ -19,7 +19,7 @@ class NewPhotoSubmitButtonTest extends DuskTestCase
             $browser->loginAs(1);
             $album = \App\Models\Album::factory()->create();
             $browser->visit('/photos/create/1')
-                    ->press('Submit')
+                    ->press('@Submit')
                 ->assertPathIs('/photos/create/1');
         });
     }
@@ -31,7 +31,7 @@ class NewPhotoSubmitButtonTest extends DuskTestCase
             $browser->visit('/photos/create/1')
                 ->type('title', 'asd')
                 ->type('description', 'asd')
-                ->press('Submit')
+                ->press('@Submit')
                 ->assertSee('The photo field is required');
         });
     }

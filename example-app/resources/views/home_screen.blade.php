@@ -67,7 +67,7 @@
         <div class="title m-b-md">
             Welcome to your Gallery
         </div>
-        <div class="buttons" name="Log In">
+        <div class="buttons" name="Log In" dusk="Login">
             @if (Route::has('login'))
 
                     @auth
@@ -75,7 +75,7 @@
                     @else
                         <a href="{{ route('login') }}">Login</a>
         </div>
-        <div class="buttons">
+        <div class="buttons" dusk="Register">
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>

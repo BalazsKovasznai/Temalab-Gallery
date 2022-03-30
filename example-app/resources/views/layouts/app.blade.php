@@ -19,7 +19,7 @@
     <body class="font-sans antialiased bg-emerald-500">
         <div class="min-h-screen bg-emerald-100">
             @include('layouts.navigation')
-
+            @include('inc.messages')
             <!-- Page Heading -->
             <header class="bg-emerald-500">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">

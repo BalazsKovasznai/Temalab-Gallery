@@ -18,7 +18,7 @@ class CreateAlbumSubmitButtonRedirectTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->loginAs(1)
                 ->visit('/albums/create')
-                ->press('Submit')
+                ->press('@Submit')
                 ->assertPathIs('/albums/create');
         });
     }
@@ -30,7 +30,7 @@ class CreateAlbumSubmitButtonRedirectTest extends DuskTestCase
                 ->visit('/albums/create')
                 ->type('name', 'asd')
                 ->type('description', 'asd')
-                ->press('Submit')
+                ->press('@Submit')
                 ->assertSee('The cover-image field is required.');
         });
     }
@@ -43,7 +43,7 @@ class CreateAlbumSubmitButtonRedirectTest extends DuskTestCase
                 ->type('name', 'asd')
                 ->type('description', 'asd')
                 ->attach('cover-image', 'C:\Users\Ildiko\Desktop\virag.jpg')
-                ->press('Submit')
+                ->press('@Submit')
                 ->assertPathIs('/albums/store');
         });
     }

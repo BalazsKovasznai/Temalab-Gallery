@@ -44,7 +44,7 @@
                                 <div class="btn-group">
                                     <a href="{{route('photo-show',$photo->id)}}" class="btn btn-sm btn-outline-secondary">View</a>
                                 </div>
-                                <small class="text-muted">{{$photo->size}}</small>
+                                <small class="text-muted">{{$photo->title}}</small>
                             </div>
                         </div>
                     </div>
