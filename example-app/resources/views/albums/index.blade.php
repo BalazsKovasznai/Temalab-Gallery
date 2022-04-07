@@ -18,6 +18,9 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <a href="{{route('album-show',$album->id)}}" class="btn btn-sm btn-outline-secondary">View</a>
+                                                <a href="{{route('album-share-create',$album->id)}}" class="btn btn-sm btn-outline-secondary" id="button_share_album"  }>
+                                                    Share
+                                                </a>
                                             </div>
                                             <small class="text-muted">{{$album->name}}</small>
                                         </div>

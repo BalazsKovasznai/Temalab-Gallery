@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->integer('album_id');
+
             $table->string('photo');
             $table->string('title');
             $table->string('size');
@@ -23,6 +23,10 @@ return new class extends Migration
 
             $table->timestamps();
         });
+
+        Schema::table('photos', function (Blueprint $table) {
+            $table->foreignId('album_id')->constrained('albums')->default(0)->nullable();
+    });
     }
 
     /**

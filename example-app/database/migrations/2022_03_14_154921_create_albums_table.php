@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,7 +21,12 @@ return new class extends Migration
             $table->string('cover_image');
             $table->bigInteger('ulby');
             $table->timestamps();
+
+
         });
+        Schema::table('albums', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained('users')->default(0);
+        });;
     }
 
     /**

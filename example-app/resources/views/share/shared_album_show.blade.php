@@ -16,14 +16,9 @@
                                 <h1 class="fw-light">{{$album->name}}</h1>
                                 <p class="lead text-muted">{{$album->description}}</p>
                                 <p>
-                                    <a href="{{ route('photo-create',$album->id ) }}" class="btn btn-primary my-2">Upload Photo</a>
                                     <a href="/albums" class="btn btn-secondary my-2">Go Back</a>
                                 </p>
-                                <form action="{{route('album-destroy',$album->id)}}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" name="button" class="btn btn-danger float-right">Delete album</button>
-                                </form>
+
                             </div>
                         </div>
                     </section>
@@ -42,7 +37,7 @@
                             <p class="card-text">{{$photo->desciption}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="{{route('photo-show',$photo->id)}}" class="btn btn-sm btn-outline-secondary">View</a>
+                                    <a href="{{route('shared-photo-show',$photo->id)}}" class="btn btn-sm btn-outline-secondary">View</a>
 
                                 </div>
                                 <small class="text-muted">{{$photo->title}}</small>

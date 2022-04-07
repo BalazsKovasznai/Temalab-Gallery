@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('album-create')" :active="request()->routeIs('album-create')">
                         {{ __('Create an Album') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('album-shared-with')" :active="request()->routeIs('album-shared-with')">
+                        {{ __('Shared with me') }}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -68,16 +68,10 @@ class AlbumsController extends Controller
         $album->description=$request->input('description');
         $album->cover_image=$filenameToStore;
         $album->ulby=$user;
+        $album->user_id=$user;
         $album->save();
 
         return redirect('/albums')->with('success','Album created succesfully!');
-
-
-
-
-
-
-
 
 
     }
@@ -100,10 +94,7 @@ class AlbumsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
