@@ -75,7 +75,7 @@ class PhotosController extends Controller
     public function show($id)
     {
         $photo=Photo::find($id);
-        $comments=DB::table('comments3')->select('comment', 'username')->where('photo_id', $id)->get()->toArray();
+        $comments=DB::table('comments3')->select('comment', 'username', 'id')->where('photo_id', $id)->get()->toArray();
         return view('photos.show')->with('photo',$photo)->with('comments', $comments);
     }
 

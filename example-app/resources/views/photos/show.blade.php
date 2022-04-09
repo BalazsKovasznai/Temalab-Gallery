@@ -44,6 +44,13 @@
                                 <div class="comment-field">
                                     <p><b>{{$comment->username}}</b></p>
                                     <p>{{$comment->comment}}</p>
+                                    <form method="post" action="{{route('comment-destroy-as-owner')}}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="photo_id" value="{{$photo->id}}">
+                                        <input type="hidden" name="comment_id" value="{{$comment->id}}">
+                                        <button type="submit">Delete comment</button>
+                                    </form>
                                 </div>
                             @endforeach
                         @else

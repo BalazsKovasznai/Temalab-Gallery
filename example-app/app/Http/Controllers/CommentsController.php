@@ -146,12 +146,17 @@ class CommentsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy_as_owner(Request $request)
     {
-        //
+        DB::table('comments3')->delete($request->input('comment_id'));
+        return redirect('/photos/'.$request->input('photo_id'));
+    }
+
+    public function destroy_as_user(Request $request)
+    {
+        DB::table('comments3')->delete($request->input('comment_id'));
+        return redirect('/shared_photos/'.$request->input('photo_id'));
     }
 }
