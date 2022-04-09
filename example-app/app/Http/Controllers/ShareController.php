@@ -37,7 +37,8 @@ class ShareController extends Controller
     public function shared_photo_show($id)
     {
         $photo=Photo::find($id);
-        return view('share.shared_photo_show')->with('photo',$photo);
+        $comments=DB::table('comments3')->select('comment', 'username')->where('photo_id', $id)->get()->toArray();
+        return view('share.shared_photo_show')->with('photo',$photo)->with('comments', $comments);
     }
 
 
