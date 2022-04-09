@@ -18,6 +18,7 @@
                                 <p>
                                     <a href="{{ route('photo-create',$album->id ) }}" class="btn btn-primary my-2">Upload Photo</a>
                                     <a href="/albums" class="btn btn-secondary my-2">Go Back</a>
+                                    <a href="{{ route('album-share-list',$album->id ) }}" class="btn btn-primary my-2">Shared with</a>
                                 </p>
                                 <form action="{{route('album-destroy',$album->id)}}" method="post">
                                     @csrf

@@ -23,6 +23,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/albums', [\App\Http\Controllers\AlbumsController::class,'index']);
 Route::resource('albums', \App\Http\Controllers\AlbumsController::class);
+Route::resource('users', \App\Http\Controllers\ShareController::class);
 Route::get('/albums/create',[\App\Http\Controllers\AlbumsController::class,'create'])->name('album-create');
 Route::post('/albums/store',[\App\Http\Controllers\AlbumsController::class,'store'])->name('album-store');
 Route::get('/albums/{id}',[\App\Http\Controllers\AlbumsController::class,'show'])->name('album-show');
@@ -37,10 +38,15 @@ Route::delete('/albums/{id}',[\App\Http\Controllers\AlbumsController::class,'des
 Route::get('/sharedalbums', [\App\Http\Controllers\ShareController::class,'index'])->name('album-shared-with');
 Route::get('/albums/{albumId}/share', [\App\Http\Controllers\ShareController::class,'create'])->name('album-share-create');
 Route::post('/share',[\App\Http\Controllers\ShareController::class,'add'])->name('album-share-add');
+Route::get('/albums/{id}/shared_with_users',[\App\Http\Controllers\ShareController::class,'list_users'])->name('album-share-list');
+Route::delete('/albums/{albumid}/shared_with_users',[\App\Http\Controllers\ShareController::class,'destroy'])->name('sharing-destroy');
+
+
 Route::get('/sharedalbums/{id}',[\App\Http\Controllers\ShareController::class,'show'])->name('album-share-show');
 Route::get('/shared_photos/{id}',[\App\Http\Controllers\ShareController::class,'shared_photo_show'])->name('shared-photo-show');
 
 Route::post('/comment_owner',[\App\Http\Controllers\CommentsController::class,'store_as_owner'])->name('comment-store-as-owner');
 Route::post('/comment_user',[\App\Http\Controllers\CommentsController::class,'store_as_user'])->name('comment-store-as-user');
+
 
 require __DIR__.'/auth.php';

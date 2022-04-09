@@ -14,7 +14,7 @@
                             <input type="hidden" name="album-id" value="{{$albumId}}">
                             <div class="form-group p-4">
                                 <label for="userid">User to share</label>
-                                <input type="text" class="form-control rounded-md w-full sm:max-w-md" name=userid id="userid" placeholder="Enter user ID">
+                                <input type="text" class="form-control rounded-md w-full sm:max-w-md" name=username id="username" placeholder="Enter username ">
                             </div>
 
                             <div class="flex items-center justify-center p-4">
@@ -22,7 +22,9 @@
                               font-semibold text-small text-black uppercase tracking-widest hover:bg-green-700 active:bg-gray-900
                                focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition
                                ease-in-out duration-150 ml-3">Share</button>
+
                             </div>
+
                         </form>
                     </div>
                 </div>

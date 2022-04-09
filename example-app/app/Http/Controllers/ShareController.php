@@ -54,10 +54,10 @@ class ShareController extends Controller
     {
 
         $this->validate($request, [
-            'userid' => 'required|exists:users,name'
+            'username' => 'required|exists:users,name'
 
         ]);
-        $username=$request->input('userid');
+        $username=$request->input('username');
         $album_id=$request->input('album-id');
         $user_id = User::select('id')->where('name', $username)->first()->id;
         $album = Album::select('id')->where('id', $album_id)->first();
@@ -66,7 +66,7 @@ class ShareController extends Controller
                 'user_id' => $user_id,
                 'album_id' => $album_id
             ]);
-            $album->is_share=true;
+
             return redirect('/albums')->with('success', 'Sharing created successfully!');
         }
         return redirect('/albums')->with('success', 'Album is already shared with this user.');
@@ -75,6 +75,33 @@ class ShareController extends Controller
     {
         $album=Album::with('photos')->find($id);
         return view('share.shared_album_show')->with('album',$album);
+    }
+
+    public function destroy($albumid,Request $request)
+    {
+
+        $user_id = $request->input('user_id');
+        $delete=DB::table('user_album_sharing')
+        ->where('album_id',$albumid)->where('user_id',$user_id)->delete();
+        return redirect('/albums')->with('success', 'Sharing deleted successfully');
+
+    }
+
+    public function list_users($albumid){
+
+
+        $sharedusers = DB::table('user_album_sharing')
+            ->select('user_id')
+            ->where('album_id', $albumid)->get()->toArray();
+
+        $s_users=Arr::pluck($sharedusers,'user_id');
+        $users = User::select()->whereIn('id',$s_users)->get();
+
+        foreach($users as $user) {
+            return view('share.shared_with_users', compact('users','albumid'))->with('user', $users)->with('sharingExist', true);
+        }
+        return view('share.shared_with_users', compact('users','albumid'))->with('user', $users)->with('sharingExist', false);
+
     }
  }
 
