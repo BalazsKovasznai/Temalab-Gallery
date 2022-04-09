@@ -831,6 +831,9 @@ select {
 .justify-center {
   justify-content: center;
 }
+.justify-right {
+    justify-content: right;
+}
 .justify-between {
   justify-content: space-between;
 }
@@ -925,6 +928,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(34 197 94 / var(--tw-bg-opacity));
 }
+.bg-green-700 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+}
 .bg-emerald-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(16 185 129 / var(--tw-bg-opacity));
@@ -937,6 +944,18 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(4 120 87 / var(--tw-bg-opacity));
 }
+.comment-field{
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.4rem;
+    padding-rigth: 0.4rem;
+    border-radius: 0.5rem;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -957,6 +976,9 @@ select {
 .px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+}
+.padding-left-50 {
+    padding-left: 5.0rem;
 }
 .px-4 {
   padding-left: 1rem;
@@ -1023,6 +1045,9 @@ select {
 }
 .text-center {
   text-align: center;
+}
+.text-right {
+    text-align: right;
 }
 .font-sans {
   font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -1217,6 +1242,10 @@ select {
 .hover\:bg-green-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+}
+.hover\:bg-green-500:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(34 197 94 / var(--tw-bg-opacity));
 }
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;

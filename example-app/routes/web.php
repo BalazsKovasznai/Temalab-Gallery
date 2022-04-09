@@ -40,4 +40,7 @@ Route::post('/share',[\App\Http\Controllers\ShareController::class,'add'])->name
 Route::get('/sharedalbums/{id}',[\App\Http\Controllers\ShareController::class,'show'])->name('album-share-show');
 Route::get('/shared_photos/{id}',[\App\Http\Controllers\ShareController::class,'shared_photo_show'])->name('shared-photo-show');
 
+Route::post('/comment_owner',[\App\Http\Controllers\CommentsController::class,'store_as_owner'])->name('comment-store-as-owner');
+Route::post('/comment_user',[\App\Http\Controllers\CommentsController::class,'store_as_user'])->name('comment-store-as-user');
+
 require __DIR__.'/auth.php';

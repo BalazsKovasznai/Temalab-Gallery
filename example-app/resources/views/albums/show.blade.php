@@ -53,7 +53,9 @@
             @endforeach
         </div>
     @else
-        <h3>No photos yet.</h3>
+        <div class="padding-left-50">
+            <h3>No photos yet.</h3>
+        </div>
     @endif
         </div>
 </x-app-layout>

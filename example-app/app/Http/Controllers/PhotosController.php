@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Photo;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class PhotosController extends Controller
 {
@@ -74,7 +75,8 @@ class PhotosController extends Controller
     public function show($id)
     {
         $photo=Photo::find($id);
-        return view('photos.show')->with('photo',$photo);
+        $comments=DB::table('comments3')->select('comment', 'username')->where('photo_id', $id)->get()->toArray();
+        return view('photos.show')->with('photo',$photo)->with('comments', $comments);
     }
 
     /**

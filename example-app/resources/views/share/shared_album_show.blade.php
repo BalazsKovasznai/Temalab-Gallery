@@ -16,7 +16,7 @@
                                 <h1 class="fw-light">{{$album->name}}</h1>
                                 <p class="lead text-muted">{{$album->description}}</p>
                                 <p>
-                                    <a href="/albums" class="btn btn-secondary my-2">Go Back</a>
+                                    <a href="/sharedalbums" class="btn btn-secondary my-2">Go Back</a>
                                 </p>
 
                             </div>
@@ -48,7 +48,9 @@
             @endforeach
         </div>
     @else
-        <h3>No photos yet.</h3>
+        <div class="padding-left-50">
+            <h3>No photos yet.</h3>
+        </div>
     @endif
         </div>
 </x-app-layout>
