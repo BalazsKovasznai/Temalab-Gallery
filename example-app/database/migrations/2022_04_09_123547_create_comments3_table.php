@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('username');
-            $table->bigInteger('photo_id');
+            $table->foreignId('photo_id')->constrained('photos')->cascadeOnDelete();
             $table->bigInteger('owner_userid');
             $table->text('comment');
             $table->timestamps();
