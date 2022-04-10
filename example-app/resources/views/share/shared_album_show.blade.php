@@ -16,7 +16,7 @@
                                 <h1 class="fw-light">{{$album->name}}</h1>
                                 <p class="lead text-muted">{{$album->description}}</p>
                                 <p>
-                                    <a href="/sharedalbums" class="btn btn-secondary my-2">Go Back</a>
+                                    <a href="/sharedwithme" class="btn btn-secondary my-2">Go Back</a>
                                 </p>
 
                             </div>

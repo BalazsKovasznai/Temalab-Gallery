@@ -16,17 +16,20 @@ class SharedWithMeScreenTest extends TestCase
      */
     public function test_example()
     {
+        $user = User::factory()->create();
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+
         $response = $this->get('/sharedwithme');
         $response->assertStatus(200);
     }
 
     public function test_new_user_can_see_no_shared_albums_yet()
     {
-        $user = User::factory()->create();
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+
         $response = $this->get('/sharedwithme');
         $response->assertSee('No shared albums yet.');
     }

@@ -28,7 +28,7 @@
                 @endforeach
             </div>
             @else
-            <div>No albums yet.</div>
+            <div>No shared albums yet.</div>
             @endif
         </div>
     </xslot>

@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class CreateAlbumScreenTest extends TestCase
 {
@@ -15,6 +16,11 @@ class CreateAlbumScreenTest extends TestCase
      */
     public function test_example()
     {
+        $user = User::factory()->create();
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
         $response = $this->get('/albums/create');
         $response->assertStatus(200);
     }

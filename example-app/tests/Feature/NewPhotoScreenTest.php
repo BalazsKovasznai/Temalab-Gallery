@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,7 +16,13 @@ class NewPhotoScreenTest extends TestCase
      */
     public function test_example()
     {
-        $album = \App\Models\Album::factory()->create();
+        $this->user = User::factory()->create();
+        $this->post('/login', [
+            'email' =>$this->user->email,
+            'password' => 'password',
+        ]);
+
+
         $response = $this->get('/photos/create/1');
         $response->assertStatus(200);
     }

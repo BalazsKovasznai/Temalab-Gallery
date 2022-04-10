@@ -35,14 +35,14 @@ Route::delete('/photos/{id}',[\App\Http\Controllers\PhotosController::class,'des
 Route::delete('/albums/{id}',[\App\Http\Controllers\AlbumsController::class,'destroy'])->name('album-destroy');
 
 
-Route::get('/sharedalbums', [\App\Http\Controllers\ShareController::class,'index'])->name('album-shared-with');
+Route::get('/sharedwithme', [\App\Http\Controllers\ShareController::class,'index'])->name('album-shared-with');
 Route::get('/albums/{albumId}/share', [\App\Http\Controllers\ShareController::class,'create'])->name('album-share-create');
 Route::post('/share',[\App\Http\Controllers\ShareController::class,'add'])->name('album-share-add');
 Route::get('/albums/{id}/shared_with_users',[\App\Http\Controllers\ShareController::class,'list_users'])->name('album-share-list');
 Route::delete('/albums/{albumid}/shared_with_users',[\App\Http\Controllers\ShareController::class,'destroy'])->name('sharing-destroy');
 
 
-Route::get('/sharedalbums/{id}',[\App\Http\Controllers\ShareController::class,'show'])->name('album-share-show');
+Route::get('/sharedwithme/{id}',[\App\Http\Controllers\ShareController::class,'show'])->name('album-share-show');
 Route::get('/shared_photos/{id}',[\App\Http\Controllers\ShareController::class,'shared_photo_show'])->name('shared-photo-show');
 
 Route::post('/comment_owner',[\App\Http\Controllers\CommentsController::class,'store_as_owner'])->name('comment-store-as-owner');

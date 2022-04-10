@@ -22,17 +22,17 @@ class ShareScreenTest extends TestCase
             'password' => 'password',
         ]);
         $album = \App\Models\Album::factory()->create();
-        $response = $this->get('/albums/share/1');
+        $response = $this->get('/albums/1/share');
         $response->assertStatus(200);
     }
     public function test_user_can_see_username_title()
     {
-        $response = $this->get('/albums/share/1');
+        $response = $this->get('/albums/1/share');
         $response->assertSee('Username');
     }
     public function test_user_can_see_share_button()
     {
-        $response = $this->get('/albums/share/1');
+        $response = $this->get('/albums/1/share');
         $response->assertSee('Share');
     }
 }
