@@ -1,4 +1,5 @@
 <x-app-layout>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <x-slot name="header">
         <h2 class="font-semi-bold text-xl text-green-800 leading-tight ">
             {{ __($photo->title) }}
@@ -11,16 +12,18 @@
                     <div class="bg-green-500 p-6 bg-green-500 border-b border-gray-200">
                         <div class="text-center">
                             <h3>{{$photo->title}}</h3>
-                            <p>{{$photo->desciption}}</p>
-                            <form action="{{route('photo-destroy',$photo->id)}}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" name="button" class="btn btn-danger float-right">Delete image</button>
-                            </form>
-                            <a href="{{route('album-show',$photo->album->id)}}" class="btn btn-info">Go Back</a>
-                        </div>
-                        <div class="py-1 flex items-center justify-center">
-                            <img src="/storage/albums/{{$photo->album_id}}/{{$photo->photo}}" alt="{{$photo->photo}}">
+                            <p>{{$photo->description}}</p>
+                            <div class="py-1 flex items-center justify-center">
+                                <img src="/storage/albums/{{$photo->album_id}}/{{$photo->photo}}" alt="{{$photo->photo}}">
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <a href="{{route('album-show',$photo->album->id)}}" class="btn btn-info">Go Back</a>
+                                <form action="{{route('photo-destroy',$photo->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" name="button" class="btn btn-danger float-right">Delete image</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-emerald-100">
@@ -54,7 +57,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <h3>No comments yet.</h3>
+                            <h5>No comments yet.</h5>
                         @endif
                     </div>
                 </div>

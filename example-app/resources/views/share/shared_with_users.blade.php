@@ -1,4 +1,5 @@
 <x-app-layout>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <x-slot name="header">
         <h2 class="font-semi-bold text-xl text-black leading-tight ">
             {{ __('Shared this album with') }}
@@ -55,7 +56,7 @@
 
                                     </div>
                                     @else
-                                        <div>Not shared with anyone.</div>
+                                        <div class="px-4 my-3 mx-5">Not shared with anyone.</div>
                                     @endif
 
                                 </div>

@@ -1,4 +1,5 @@
 <x-app-layout>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <x-slot name="header">
         <h2 class="font-semi-bold text-xl text-green-800 leading-tight ">
             {{ __('Shared with me Albums') }}
@@ -28,7 +29,7 @@
                 @endforeach
             </div>
             @else
-            <div>No shared albums yet.</div>
+            <h5 class="my-3">No shared albums yet.</h5>
             @endif
         </div>
     </xslot>

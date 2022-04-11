@@ -1,4 +1,5 @@
 <x-app-layout>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <x-slot name="header">
         <h2 class="font-semi-bold text-xl text-green-800 leading-tight ">
             {{ __('My Albums') }}
@@ -11,7 +12,7 @@
                     @foreach($albums as $album)
                         @if($album->ulby==auth()->id())
                             <div class="col" >
-                                <div class="card shadow-sm">
+                                <div class="card shadow-sm m-2">
                                     <img src="/storage/album_covers/{{ $album->cover_image }}" alt="{{ $album->cover_image }}" height="300" width="300">
                                     <div class="card-body">
                                         <p class="card-text">{{$album->desciption}}</p>
@@ -31,7 +32,7 @@
                     @endforeach
                 </div>
             @else
-                <div>No albums yet.</div>
+                <h5 class="my-3">No albums yet.</h5>
             @endif
         </div>
     </xslot>

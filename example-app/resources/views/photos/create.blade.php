@@ -1,4 +1,5 @@
 <x-app-layout>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <x-slot name="header">
         <h2 class="font-semi-bold text-xl text-green-800 leading-tight ">
             {{ __('Upload new photo') }}
@@ -12,15 +13,15 @@
                         <form method="post" action="{{ route('photo-store') }}" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="album-id" value="{{$albumId}}">
-                            <div class="form-group p-4">
+                            <div class="form-group p-3">
                                 <label for="title">Title</label>
                                 <input type="text" class="form-control rounded-md w-full sm:max-w-md" name=title id="title" placeholder="Enter Title">
                             </div>
-                            <div class="form-group  px-4">
+                            <div class="form-group  px-3">
                                 <label for="description">Description</label>
                                 <input type="text" class="form-control rounded-md w-full sm:max-w-md" name="description" id="description" placeholder="Enter description">
                             </div>
-                            <div class="form-group p-4">
+                            <div class="form-group p-3">
                                 <div>
                                     <label for="photo">Photo</label>
                                 </div>

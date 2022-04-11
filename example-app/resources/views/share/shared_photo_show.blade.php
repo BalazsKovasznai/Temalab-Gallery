@@ -1,4 +1,5 @@
 <x-app-layout>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <x-slot name="header">
         <h2 class="font-semi-bold text-xl text-green-800 leading-tight ">
             {{ __($photo->title) }}
@@ -11,7 +12,7 @@
                     <div class="bg-green-500 p-6 bg-green-500 border-b border-gray-200">
                         <div class="text-center">
                             <h3>{{$photo->title}}</h3>
-                            <p>{{$photo->desciption}}</p>
+                            <p>{{$photo->description}}</p>
                                 @csrf
                             </form>
                             <a href="{{route('album-share-show',$photo->album->id)}}" class="btn btn-info">Go Back</a>
@@ -53,7 +54,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <h3>No comments yet.</h3>
+                            <h5>No comments yet.</h5>
                         @endif
                     </div>
                     </div>
