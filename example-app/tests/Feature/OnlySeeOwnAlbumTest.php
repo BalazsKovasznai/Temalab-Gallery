@@ -38,4 +38,48 @@ class OnlySeeOwnAlbumTest extends TestCase
         $response = $this->get('/albums');
         $response->assertDontSee($album->name);
     }
+
+    public function test_user_can_only_get_own_albums()
+    {
+        $user1 = User::factory()->create();
+        $this->post('/login', [
+            'email' => $user1->email,
+            'password' => 'password',
+        ]);
+        $album = \App\Models\Album::factory()->create();
+        Auth::logout();
+
+        $user2 = User::factory()->create();
+        $this->post('/login', [
+            'email' => $user2->email,
+            'password' => 'password',
+        ]);
+
+        $response = $this->get('/albums/'.$album->id);
+        $response->assertDontSee($album->name);
+
+    }
+
+    public function test_user_can_only_delete_own_albums()
+    {
+        $user1 = User::factory()->create();
+        $this->post('/login', [
+            'email' => $user1->email,
+            'password' => 'password',
+        ]);
+        $album = \App\Models\Album::factory()->create();
+        Auth::logout();
+
+        $user2 = User::factory()->create();
+        $this->post('/login', [
+            'email' => $user2->email,
+            'password' => 'password',
+        ]);
+
+        $this->delete('/albums/'.$album->id);
+        $response = $this->get('/albums');
+        $response->assertDontSee('Album deleted successfully');
+
+    }
+
 }
