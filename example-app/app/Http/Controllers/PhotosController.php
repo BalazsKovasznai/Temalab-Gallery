@@ -33,7 +33,7 @@ class PhotosController extends Controller
         if($album->ulby == auth()->id()){
             return view('photos.create')->with('albumId',$albumId);
         }
-        else return view('dashboard');
+        else return redirect('/dashboard')->with('danger', 'Access denied');
     }
 
     /**

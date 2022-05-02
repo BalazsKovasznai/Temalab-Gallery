@@ -944,6 +944,12 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(4 120 87 / var(--tw-bg-opacity));
 }
+.deny-field-warning{
+    --tw-bg-opacity: 1;
+    color: rgb(133 100 4 / var(--tw-bg-opacity));
+    border-color: rgb(245 193 203 / var(--tw-bg-opacity));
+    background-color: rgb(240 238 186 / var(--tw-bg-opacity));
+}
 .comment-field{
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));

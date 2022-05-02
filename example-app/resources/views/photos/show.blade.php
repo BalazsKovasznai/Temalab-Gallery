@@ -75,9 +75,9 @@
         </x-slot>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-green-500 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-3 bg-green-500 border-b border-gray-200">
-                        <p>This content is currently unavailable.</p>
+                <div class="deny-field-warning overflow-hidden sm:rounded-lg">
+                    <div class="p-6 deny-field-warning">
+                        This content is currently unavailable.
                     </div>
                 </div>
             </div>
