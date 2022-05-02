@@ -71,20 +71,21 @@ class PhotoTest extends TestCase
     public function test_user_can_only_upload_to_own_albums()
     {
         $user1 = User::factory()->create();
-        $this->post('/login', [
-            'email' => $user1->email,
-            'password' => 'password',
-        ]);
+        Auth::login($user1);
         $album = \App\Models\Album::factory()->create();
+        $this->post('/albums/create', [
+            'name'=>$album->name,
+            'description'=>$album->description,
+            'cover_image'=>$album->cover_image,
+            'ulby'=>$user1->id,
+            'user_id'=>$user1->id,
+        ]);
         Auth::logout();
 
         $user2 = User::factory()->create();
-        $this->post('/login', [
-            'email' => $user2->email,
-            'password' => 'password',
-        ]);
+        Auth::login($user2);
         $response = $this->get('/photos/create'.$album->id);
-        $response->assertDontSee('Upload new photo');
+        $response->assertSee('This content is currently unavailable.');
     }
 
     public function test_user_can_only_delete_own_photos()
@@ -103,7 +104,7 @@ class PhotoTest extends TestCase
             'password' => 'password',
         ]);
 
-        $this->delete('/photos/'.$photo->id);
+        $this->delete('/photos'.$photo->id);
         $response = $this->get('/albums');
         $response->assertDontSee('Photo deleted successfully');
 

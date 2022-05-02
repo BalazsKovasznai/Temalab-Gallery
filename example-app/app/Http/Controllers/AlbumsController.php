@@ -117,7 +117,7 @@ class AlbumsController extends Controller
     public function destroy($id)
     {
         $album=Album::find ($id);
-        if(Storage::delete('/public/storage/albums/'.$album->album_id.'/'.$album->album)) {
+        if(Storage::delete('/public/storage/albums/'.$album->album_id.'/'.$album->album) && $album->ulby==auth()->id()) {
             $album->delete();
             return redirect('/albums')->with('success', 'Album deleted successfully');
         }

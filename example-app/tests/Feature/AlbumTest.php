@@ -37,8 +37,6 @@ class  AlbumTest extends TestCase
 
    public function test_user_can_see_view()
     {
-
-
         $response = $this->get('/albums');
         $response = $this->post('/albums/create', [
             'name'=>$this->album->name,
@@ -52,21 +50,18 @@ class  AlbumTest extends TestCase
 
     public function test_user_can_see_upload_photo_link()
     {
-
-        $response = $this->get('/albums/1');
+        $response = $this->get('/albums/$album_id');
         $response->assertSee('Upload Photo');
     }
 
     public function test_user_can_see_share()
     {
-
-        $response = $this->get('/albums/1');
+        $response = $this->get('/albums/$album_id');
         $response->assertSee('Share');
     }
 
     public function test_new_user_can_see_no_albums_yet()
     {
-
         $response = $this->get('/albums');
         $response->assertSee('No albums yet.');
     }

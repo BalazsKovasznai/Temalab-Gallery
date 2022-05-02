@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use Illuminate\Http\Request;
 use App\Models\Photo;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,11 @@ class PhotosController extends Controller
      */
     public function create(int $albumId)
     {
-        return view('photos.create')->with('albumId',$albumId);
+        $album = Album::find($albumId);
+        if($album->ulby == auth()->id()){
+            return view('photos.create')->with('albumId',$albumId);
+        }
+        else return view('dashboard');
     }
 
     /**
@@ -43,7 +48,6 @@ class PhotosController extends Controller
             'title' => 'required',
             'description' => 'required',
             'photo' => 'required|image'
-
         ]);
         $filenameWithExtension=$request->file('photo')->getClientOriginalName();
 
@@ -62,8 +66,8 @@ class PhotosController extends Controller
         $photo->size=$request->file('photo')->getSize();
         $photo->album_id=$request->input('album-id');
         $photo->save();
-
         return redirect('/albums/' . $request->input('album-id'))->with('success','Photo created successfully!');
+
     }
 
     /**
@@ -75,8 +79,9 @@ class PhotosController extends Controller
     public function show($id)
     {
         $photo=Photo::find($id);
+        $album=Album::find($photo->album_id);
         $comments=DB::table('comments3')->select('comment', 'username', 'id')->where('photo_id', $id)->get()->toArray();
-        return view('photos.show')->with('photo',$photo)->with('comments', $comments);
+        return view('photos.show')->with('photo',$photo)->with('comments', $comments)->with('album',$album);
     }
 
     /**
@@ -111,7 +116,8 @@ class PhotosController extends Controller
     public function destroy($id)
     {
         $photo=Photo::find ($id);
-        if(Storage::delete('/public/albums/'.$photo->album_id.'/'.$photo->photo))
+        $album=Album::find($photo->album_id);
+        if(Storage::delete('/public/albums/'.$photo->album_id.'/'.$photo->photo) && $album->ulby==auth()->id())
         {
             $photo->delete();
             return redirect('/albums')->with('success', 'Photo deleted successfully');
