@@ -42,31 +42,18 @@ class CommentsController extends Controller
             'comment' => 'required'
         ]);
         $comment=$request->input('comment');
-        $user_id = auth()->id();
-        $users = User::get();
-        foreach ($users as $user){
-            if($user->id == $user_id){
-                $username = $user->name;
-            }
-        }
-        $photo_id = $request->input('photo_id');
-        $photos = Photo::get();
-        foreach ($photos as $photo)
-        {
-            if($photo->id == $photo_id){
-                $album_id = $photo->album_id;
-            }
-        }
+        $user = User::find(auth()->id());
+        $photo = Photo::get($request->input('photo_id'));
         $albums = Album::get();
         foreach ($albums as $album){
-            if($album->id == $album_id){
+            if($album->id == $photo->album_id){
                 $owner_userid = $album->ulby;
             }
         }
         DB::table('comments3')->insert([
-            'user_id' => $user_id,
-            'username' => $username,
-            'photo_id' => $photo_id,
+            'user_id' => $user->id,
+            'username' => $user->name,
+            'photo_id' => $photo->id,
             'owner_userid' => $owner_userid,
             'comment' => $comment
         ]);
@@ -79,35 +66,31 @@ class CommentsController extends Controller
             'comment' => 'required'
         ]);
         $comment=$request->input('comment');
-        $user_id = auth()->id();
-        $users = User::get();
-        foreach ($users as $user){
-            if($user->id == $user_id){
-                $username = $user->name;
+        $photo = Photo::find($request->input('photo_id'));
+        $user = User::find(auth()->id());
+
+        $sharedalbums = DB::table('user_album_sharing')->where('user_id', $user->id)->get()->toArray();
+
+        foreach ($sharedalbums as $share){
+            if($share->album_id == $photo->album_id){
+                $albums = Album::get();
+                foreach ($albums as $album){
+                    if($album->id == $photo->album_id){
+                        $owner_userid = $album->ulby;
+                    }
+                }
+                DB::table('comments3')->insert([
+                    'user_id' => $user->id,
+                    'username' => $user->name,
+                    'photo_id' => $photo->id,
+                    'owner_userid' => $owner_userid,
+                    'comment' => $comment
+                ]);
+                return redirect('/shared_photos/'.$request->input('photo_id'));
             }
         }
-        $photo_id = $request->input('photo_id');
-        $photos = Photo::get();
-        foreach ($photos as $photo)
-        {
-            if($photo->id == $photo_id){
-                $album_id = $photo->album_id;
-            }
-        }
-        $albums = Album::get();
-        foreach ($albums as $album){
-            if($album->id == $album_id){
-                $owner_userid = $album->ulby;
-            }
-        }
-        DB::table('comments3')->insert([
-            'user_id' => $user_id,
-            'username' => $username,
-            'photo_id' => $photo_id,
-            'owner_userid' => $owner_userid,
-            'comment' => $comment
-        ]);
-        return redirect('/shared_photos/'.$request->input('photo_id'));
+        return redirect('/dashboard')->with('danger', 'Access denied');
+
     }
 
     /**

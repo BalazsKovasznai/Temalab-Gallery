@@ -37,8 +37,16 @@ class ShareController extends Controller
     public function shared_photo_show($id)
     {
         $photo=Photo::find($id);
-        $comments=DB::table('comments3')->select('comment', 'username', 'user_id', 'id')->where('photo_id', $id)->get()->toArray();
-        return view('share.shared_photo_show')->with('photo',$photo)->with('comments', $comments);
+        $sharedalbums = DB::table('user_album_sharing')->where('user_id', auth()->id())->get()->toArray();
+
+        foreach ($sharedalbums as $album){
+            if($album->album_id == $photo->album_id){
+                $comments=DB::table('comments3')->select('comment', 'username', 'user_id', 'id')->where('photo_id', $id)->get()->toArray();
+                return view('share.shared_photo_show')->with('photo',$photo)->with('comments', $comments);
+            }
+        }
+        return view('layouts.unavailable');
+
     }
 
 
@@ -74,7 +82,13 @@ class ShareController extends Controller
     public function show($id)
     {
         $album=Album::with('photos')->find($id);
-        return view('share.shared_album_show')->with('album',$album);
+        $sharedalbums = DB::table('user_album_sharing')->where('user_id', auth()->id())->get()->toArray();
+        foreach ($sharedalbums as $shared){
+            if($shared->album_id == $album->id){
+                return view('share.shared_album_show')->with('album',$album);
+            }
+        }
+        return view('layouts.unavailable');
     }
 
     public function destroy($albumid,Request $request)

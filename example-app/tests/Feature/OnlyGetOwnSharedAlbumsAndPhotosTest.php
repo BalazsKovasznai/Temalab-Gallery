@@ -122,6 +122,8 @@ class OnlyGetOwnSharedAlbumsAndPhotosTest extends TestCase
             'photo_id'=>$this->photo->id
         ]);
 
+        Auth::logout();
+        Auth::login($this->user2);
         $response = $this->get('/shared_photos/'.$this->photo->id);
         $response->assertDontSee($comment);
     }
