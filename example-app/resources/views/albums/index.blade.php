@@ -10,7 +10,7 @@
             @if($ownAlbumExist)
                 <div class="row" >
                     @foreach($albums as $album)
-                        @if($album->ulby==auth()->id())
+                        @if($album->user_id==auth()->id())
                             <div class="col" >
                                 <div class="card shadow-sm m-2">
                                     <img src="/storage/album_covers/{{ $album->cover_image }}" alt="{{ $album->cover_image }}" height="300" width="300">
