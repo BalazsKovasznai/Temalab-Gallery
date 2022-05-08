@@ -29,7 +29,6 @@ class  AlbumTest extends TestCase
             'name'=>$this->album->name,
             'description'=>$this->album->description,
             'cover_image'=>$this->album->cover_image,
-            'ulby'=>13,
             'user_id'=>$this->user->id,
         ]);
         $response->assertSee($this->album->name);
@@ -42,7 +41,6 @@ class  AlbumTest extends TestCase
             'name'=>$this->album->name,
             'description'=>$this->album->description,
             'cover_image'=>$this->album->cover_image,
-            'ulby'=>13,
             'user_id'=>$this->user->id,
         ]);
         $response->assertSee('View');

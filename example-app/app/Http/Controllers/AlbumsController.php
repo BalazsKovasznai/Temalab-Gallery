@@ -19,7 +19,7 @@ class AlbumsController extends Controller
         //$albums = Album::paginate();
         $albums=Album::get();
         foreach ($albums as $album){
-            if($album->ulby==auth()->id()){
+            if($album->user_id==auth()->id()){
                 return view('albums.index', compact('albums'))->with('albums',$albums)->with('ownAlbumExist', true);
             }
         }
@@ -67,7 +67,6 @@ class AlbumsController extends Controller
         $album->name=$request->input('name');
         $album->description=$request->input('description');
         $album->cover_image=$filenameToStore;
-        $album->ulby=$user;
         $album->user_id=$user;
         $album->save();
 
@@ -117,7 +116,7 @@ class AlbumsController extends Controller
     public function destroy($id)
     {
         $album=Album::find ($id);
-        if(Storage::delete('/public/storage/albums/'.$album->album_id.'/'.$album->album) && $album->ulby==auth()->id()) {
+        if(Storage::delete('/public/storage/albums/'.$album->album_id.'/'.$album->album) && $album->user_id==auth()->id()) {
             $album->delete();
             return redirect('/albums')->with('success', 'Album deleted successfully');
         }

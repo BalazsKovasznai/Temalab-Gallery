@@ -30,7 +30,7 @@ class PhotosController extends Controller
     public function create(int $albumId)
     {
         $album = Album::find($albumId);
-        if($album->ulby == auth()->id()){
+        if($album->user_id == auth()->id()){
             return view('photos.create')->with('albumId',$albumId);
         }
         else return redirect('/dashboard')->with('danger', 'Access denied');
@@ -117,7 +117,7 @@ class PhotosController extends Controller
     {
         $photo=Photo::find ($id);
         $album=Album::find($photo->album_id);
-        if(Storage::delete('/public/albums/'.$photo->album_id.'/'.$photo->photo) && $album->ulby==auth()->id())
+        if(Storage::delete('/public/albums/'.$photo->album_id.'/'.$photo->photo) && $album->user_id==auth()->id())
         {
             $photo->delete();
             return redirect('/albums')->with('success', 'Photo deleted successfully');
