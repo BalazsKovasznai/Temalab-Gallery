@@ -40,7 +40,6 @@ class OnlyGetOwnSharedAlbumsAndPhotosTest extends TestCase
             'name'=>$this->album->name,
             'description'=>$this->album->description,
             'cover_image'=>$this->album->cover_image,
-            'ulby'=>$this->user1->id,
             'user_id'=>$this->user1->id,
         ]);
         $this->post('/share', [
@@ -69,7 +68,6 @@ class OnlyGetOwnSharedAlbumsAndPhotosTest extends TestCase
             'name'=>$this->album->name,
             'description'=>$this->album->description,
             'cover_image'=>$this->album->cover_image,
-            'ulby'=>$this->user1->id,
             'user_id'=>$this->user1->id,
         ]);
         $this->post('/photos/create/$photo_id', [
@@ -98,7 +96,6 @@ class OnlyGetOwnSharedAlbumsAndPhotosTest extends TestCase
             'name'=>$this->album->name,
             'description'=>$this->album->description,
             'cover_image'=>$this->album->cover_image,
-            'ulby'=>$this->user1->id,
             'user_id'=>$this->user1->id,
         ]);
         $this->post('/photos/create/$photo_id', [

@@ -30,7 +30,6 @@ class PhotoTest extends TestCase
             'name'=>$album->name,
             'description'=>$album->description,
             'cover_image'=>$album->cover_image,
-            'ulby'=>13,
             'user_id'=>$user->id,
         ]);
 
@@ -77,7 +76,6 @@ class PhotoTest extends TestCase
             'name'=>$album->name,
             'description'=>$album->description,
             'cover_image'=>$album->cover_image,
-            'ulby'=>$user1->id,
             'user_id'=>$user1->id,
         ]);
         Auth::logout();

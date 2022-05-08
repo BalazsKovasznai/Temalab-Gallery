@@ -47,7 +47,7 @@ class CommentsController extends Controller
         $albums = Album::get();
         foreach ($albums as $album){
             if($album->id == $photo->album_id){
-                $owner_userid = $album->ulby;
+                $owner_userid = $album->user_id;
             }
         }
         DB::table('comments3')->insert([
@@ -76,7 +76,7 @@ class CommentsController extends Controller
                 $albums = Album::get();
                 foreach ($albums as $album){
                     if($album->id == $photo->album_id){
-                        $owner_userid = $album->ulby;
+                        $owner_userid = $album->user_id;
                     }
                 }
                 DB::table('comments3')->insert([

@@ -29,7 +29,6 @@ class NewPhotoScreenTest extends TestCase
             'name'=>$this->album->name,
             'description'=>$this->album->description,
             'cover_image'=>$this->album->cover_image,
-            'ulby'=>$this->user->id,
             'user_id'=>$this->user->id,
         ]);
     }
