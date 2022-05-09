@@ -18,19 +18,19 @@ class ShareButtonRedirectTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->loginAs(1)
-                ->visit('/albums/share/1')
+                ->visit('/albums/1/share/')
                 ->press('Share')
-                ->assertPathIs('/albums/share/1')
+                ->assertPathIs('/albums/1/share/')
                 ->assertSee('Please enter a username');
         });
     }
     public function test_with_existing_username()
     {
         $this->browse(function (Browser $browser) {
-            $user = User::factory()->create();
+
             $browser->loginAs(1)
-                ->visit('/albums/share/1')
-                ->type('username', $user->username)
+                ->visit('/albums/1/share/')
+                ->type('username', 'balazs')
                 ->press('Share')
                 ->assertPathIs('/albums/share/store');
         });
@@ -43,10 +43,10 @@ class ShareButtonRedirectTest extends DuskTestCase
                 $username = $this->generateRandomString(12);
             }
             $browser->loginAs(1)
-                ->visit('/albums/share/1')
+                ->visit('/albums/1/share/')
                 ->type('username', $username)
-                ->press('Share')
-                ->assertPathIs('/albums/share/1')
+                ->press('@Share')
+                ->assertPathIs('/albums/1/share/')
                 ->assertSee("This username doesn't exist");
         });
     }

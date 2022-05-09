@@ -17,7 +17,7 @@ class CommentOnImageScreenTest extends TestCase
     {
         $album = \App\Models\Album::factory()->create();
         $photo = \App\Models\Photo::factory()->create();
-        $response = $this->get('/photos/1');
+        $response = $this->get('/photos/{id}');
         $response->assertSee('Comment');
     }
 }

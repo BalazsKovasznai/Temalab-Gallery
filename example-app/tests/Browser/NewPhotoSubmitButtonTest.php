@@ -17,7 +17,6 @@ class NewPhotoSubmitButtonTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->loginAs(1);
-            $album = \App\Models\Album::factory()->create();
             $browser->visit('/photos/create/1')
                     ->press('@Submit')
                 ->assertPathIs('/photos/create/1');
@@ -40,12 +39,11 @@ class NewPhotoSubmitButtonTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->loginAs(1);
-            $album = \App\Models\Album::factory()->create();
             $browser->visit('/photos/create/1')
                 ->type('title', 'asd')
                 ->type('description', 'asd')
-                ->attach('photo', 'C:\Users\Ildiko\Desktop\virag.jpg')
-                ->press('Submit')
+                ->attach('photo', 'C:\Fotók\_GP_2672-kicsi.jpg')
+                ->press('@Submit')
                 ->assertPathIs('/albums/1');
         });
     }

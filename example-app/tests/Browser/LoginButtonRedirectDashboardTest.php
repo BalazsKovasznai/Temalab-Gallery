@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -17,8 +18,13 @@ class LoginButtonRedirectDashboardTest extends DuskTestCase
     {
         {
             $this->browse(function ($browser) {
-                $browser->loginAs(1)
-                    ->press('Log In')
+
+
+                $browser->logout(1)
+                    ->visit('/login')
+                    ->type('email','kovasznaibalazs@gmail.com')
+                    ->type('password', '12345678')
+                    ->press('@loginbutton')
                     ->assertPathIs('/dashboard');
 
 
