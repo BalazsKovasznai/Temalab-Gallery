@@ -43,7 +43,7 @@ class CommentsController extends Controller
         ]);
         $comment=$request->input('comment');
         $user = User::find(auth()->id());
-        $photo = Photo::get($request->input('photo_id'));
+        $photo = Photo::find($request->input('photo_id'));
         $albums = Album::get();
         foreach ($albums as $album){
             if($album->id == $photo->album_id){
