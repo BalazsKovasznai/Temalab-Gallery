@@ -47,19 +47,21 @@ class AlbumsController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
-            'cover-image' => 'required|image'
+            'cover-image' => 'image'
 
         ]);
-        $filenameWithExtension=$request->file('cover-image')->getClientOriginalName();
+        $filenameToStore = 'asd' . '_' . time() . '_' . 'jpg';
+        if($request->file('cover-image')!=null) {
+            $filenameWithExtension = $request->file('cover-image')->getClientOriginalName();
 
-        $filename=pathinfo($filenameWithExtension,PATHINFO_FILENAME);
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
 
-        $extension= $request->file('cover-image')->getClientOriginalExtension();
+            $extension = $request->file('cover-image')->getClientOriginalExtension();
 
-        $filenameToStore=$filename . '_' . time() . '_' . $extension;
+            $filenameToStore = $filename . '_' . time() . '_' . $extension;
 
-        $request->file('cover-image')->storeAs('public/album_covers',$filenameToStore);
-
+            $request->file('cover-image')->storeAs('public/album_covers', $filenameToStore);
+        }
         $user=Auth::id();
 
 
