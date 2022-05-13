@@ -8,6 +8,7 @@ use App\Models\Photo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class NewPhotoScreenTest extends TestCase
@@ -23,28 +24,36 @@ class NewPhotoScreenTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create();
-        $this->album = Album::factory()->create();
-        Auth::login($this->user);
-        $this->post('/albums/create', [
+        $this->post('/login', [
+            'email' =>$this->user->email,
+            'password' => 'password',
+        ]);
+        $this->album = \App\Models\Album::factory()->create();
+        $this->post('/albums/store', [
             'name'=>$this->album->name,
             'description'=>$this->album->description,
-            'cover_image'=>$this->album->cover_image,
             'user_id'=>$this->user->id,
         ]);
     }
 
     public function test_user_can_see_the_page()
     {
-        Auth::login($this->user);
-        $response = $this->get('/photos/create'.$this->album->id);
+        $albumid = DB::table('albums')->select('id')->where('user_id', $this->user->id)->first()->id;
+
+        $response = $this->actingAs($this->user)->get("/photos/create/".$albumid);
+        $response->assertStatus(200);
         $response->assertSee('Upload new photo');
     }
 
     public function test_user_can_see_the_fields()
     {
-        Auth::login($this->user);
-        $response = $this->get('/photos/create'.$this->album->id);
+        $albumid = DB::table('albums')->select('id')->where('user_id', $this->user->id)->first()->id;
+
+        $response = $this->actingAs($this->user)->get("/photos/create/".$albumid);
+        $response->assertStatus(200);
         $response->assertSeeInOrder(['Title', 'Description', 'Photo']);
+
+
     }
 
 }

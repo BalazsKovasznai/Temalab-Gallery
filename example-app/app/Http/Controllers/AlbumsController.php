@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -117,10 +118,10 @@ class AlbumsController extends Controller
      */
     public function destroy($id)
     {
-        $album=Album::find ($id);
-        if(Storage::delete('/public/storage/albums/'.$album->album_id.'/'.$album->album) && $album->user_id==auth()->id()) {
-            $album->delete();
-            return redirect('/albums')->with('success', 'Album deleted successfully');
-        }
+        $album = Album::find($id);
+        $delete=DB::table('albums')
+            ->where('id',$album->id)->delete();
+        $album->delete();
+        return redirect('/albums')->with('success', 'Album deleted successfully');
     }
 }

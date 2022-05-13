@@ -16,9 +16,9 @@ class CommentOnImageCommentButtonTest extends DuskTestCase
     public function test_user_can_not_leave_empty_comment()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(1)
+            $browser
                     ->visit('/photos/1')
-                    ->click('@Comment')
+                    ->press('@Comment')
                     //->press('Comment')
                     ->assertSee("The comment field is required.");
         });
@@ -26,7 +26,7 @@ class CommentOnImageCommentButtonTest extends DuskTestCase
     public function test_user_can_comment_own_photos()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(1);
+            $browser->loginAs(13);
             $browser->visit('/photos/1')
                 ->type('comment', 'comment asd')
                 ->press('@Comment')

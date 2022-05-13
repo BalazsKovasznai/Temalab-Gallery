@@ -2,14 +2,54 @@
 
 namespace Tests\Feature;
 
+use App\Models\Photo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use App\Models\User;
 
 class PhotoTest extends TestCase
 {
+    private $user;
+    private $otheruser;
+    private $album;
+    private $albumid;
+    private $photoid;
+    private $photo;
+
+
+    public function setUp() :void
+    {
+        parent::setUp();
+        $this->user = User::factory()->create();
+        $this->post('/login', [
+            'email' =>$this->user->email,
+            'password' => 'password',
+        ]);
+        $this->album = \App\Models\Album::factory()->create();
+        $this->post('/albums/store', [
+            'name'=>$this->album->name,
+            'description'=>$this->album->description,
+            'user_id'=>$this->user->id,
+        ]);
+        $this->albumid = DB::table('albums')->select('id')->where('user_id', $this->user->id)->first()->id;
+        $this->photo = \App\Models\Photo::factory()->create();
+
+        $file= UploadedFile::fake()->image('image.jpg');
+        $this->post('/photos/store', [
+            'title'=>$this->photo->title,
+            'description'=>$this->photo->description,
+            'photo'=> $file,
+            'album-id' => $this->albumid
+        ]);
+
+        $this->photoid=DB::table('photos')->select('id')->where('album_id', $this->albumid)->first()->id;
+        $this->otheruser = User::factory()->create();
+
+    }
     /**
      * A basic feature test example.
      *
@@ -17,94 +57,63 @@ class PhotoTest extends TestCase
      */
     public function test_user_can_create_photo_in_album()
     {
-        $user = User::factory()->create();
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
+        $photo2 = \App\Models\Photo::factory()->create();
+
+        $file= UploadedFile::fake()->image('image.jpg');
+        $this->post('/photos/store', [
+            'title'=>$photo2->title,
+            'description'=>$photo2->description,
+            'photo'=> $file,
+            'album-id' => $this->albumid
         ]);
 
+        $response = $this->get('/albums/'.$this->albumid);
+        $response->assertStatus(200);
+        $response->assertSee($photo2->title);
 
-        $album = \App\Models\Album::factory()->create();
-
-        $response = $this->post('/albums/create', [
-            'name'=>$album->name,
-            'description'=>$album->description,
-            'cover_image'=>$album->cover_image,
-            'user_id'=>$user->id,
-        ]);
-
-        $photo = \App\Models\Photo::factory()->create();
-        $response = $this->post('/photos/create/$photo_id', [
-            'title'=>$photo->name,
-            'photo'=>$photo->image,
-            'size'=>5,
-            'description'=>$photo->name,
-            'album_id'=>$album->id,
-
-        ]);
-        $response = $this->get('/albums/$album_id');
-        $response->assertSee($photo->title);
     }
 
 
     public function test_user_can_only_get_own_photos()
     {
-        $user1 = User::factory()->create();
-        $this->post('/login', [
-            'email' => $user1->email,
-            'password' => 'password',
-        ]);
-        $photo = \App\Models\Photo::factory()->create();
-        Auth::logout();
 
-        $user2 = User::factory()->create();
-        $this->post('/login', [
-            'email' => $user2->email,
-            'password' => 'password',
-        ]);
 
-        $response = $this->get('/photos/'.$photo->id);
-        $response->assertDontSee($photo->title);
+        Auth::login($this->otheruser);
+        $response = $this->get('/photos/'.$this->photoid);
+        $response->assertStatus(200);
+
+        $response->assertDontSee($this->photo->title);
     }
 
     public function test_user_can_only_upload_to_own_albums()
     {
-        $user1 = User::factory()->create();
-        Auth::login($user1);
-        $album = \App\Models\Album::factory()->create();
-        $this->post('/albums/create', [
-            'name'=>$album->name,
-            'description'=>$album->description,
-            'cover_image'=>$album->cover_image,
-            'user_id'=>$user1->id,
-        ]);
-        Auth::logout();
 
-        $user2 = User::factory()->create();
-        Auth::login($user2);
-        $response = $this->get('/photos/create'.$album->id);
-        $response->assertSee('This content is currently unavailable.');
+        Auth::login($this->otheruser);
+        $response = $this->get('/photos/create/'.$this->albumid);
+        $response->assertStatus(302);
+
+        $response->assertRedirect('/dashboard');
+        $response= $this->get('/dashboard');
+        $response->assertSee('Access denied');
     }
 
     public function test_user_can_only_delete_own_photos()
     {
-        $user1 = User::factory()->create();
-        $this->post('/login', [
-            'email' => $user1->email,
-            'password' => 'password',
-        ]);
-        $photo = \App\Models\Photo::factory()->create();
-        Auth::logout();
-
-        $user2 = User::factory()->create();
-        $this->post('/login', [
-            'email' => $user2->email,
-            'password' => 'password',
-        ]);
-
-        $this->delete('/photos'.$photo->id);
+        Auth::login($this->otheruser);
+        $this->delete('/photos/'.$this->photoid);
         $response = $this->get('/albums');
+        $response->assertStatus(200);
         $response->assertDontSee('Photo deleted successfully');
+
+    }
+
+    public function test_user_can_delete_own_photos()
+    {
+        Auth::login($this->user);
+        $this->delete('/photos/'.$this->photoid);
+        $response = $this->get('/albums');
+        $response->assertStatus(200);
+        $response->assertSee('Photo deleted successfully');
 
     }
 }

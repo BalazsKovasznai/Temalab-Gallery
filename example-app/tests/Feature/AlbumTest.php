@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
@@ -60,14 +61,30 @@ class  AlbumTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Share');
     }
+    public function test_user_can_only_delete_own_albums()
+    {
+
+        $albumid = DB::table('albums')->select('id')->where('user_id', $this->user->id)->first()->id;
+        $response=$this->delete("/albums/".$albumid);
+        $this->assertDatabaseMissing('albums',['id'=> $albumid]);
+        $response=$this->get('/albums');
+        $response->assertStatus(200);
+        $response->assertDontSee($this->album->name);
+    }
 
     public function test_new_user_cant_see_no_albums_yet()
     {
-        $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/albums');
+        $user1 = User::factory()->create();
+        Auth::logout();
+        Auth::login($user1);
+
+        $response = $this->actingAs($user1)->get('/albums');
         $response->assertStatus(200);
         $response->assertSee('No albums yet.');
     }
+
+
+
 
 
 }

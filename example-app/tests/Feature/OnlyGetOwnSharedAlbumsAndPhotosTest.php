@@ -2,8 +2,11 @@
 
 namespace Tests\Feature;
 
+use Cassandra\Bigint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use phpDocumentor\Reflection\Types\Integer;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Album;
@@ -23,6 +26,8 @@ class OnlyGetOwnSharedAlbumsAndPhotosTest extends TestCase
     private User $user3;
     private Album $album;
     private Photo $photo;
+
+
     public function setUp() :void
     {
         parent::setUp();
@@ -31,97 +36,85 @@ class OnlyGetOwnSharedAlbumsAndPhotosTest extends TestCase
         $this->user3 = User::factory()->create();
         $this->album = Album::factory()->create();
         $this->photo = Photo::factory()->create();
+        Auth::login($this->user1);
+        $this->post('/albums/store', [
+            'name'=>$this->album->name,
+            'description'=>$this->album->description,
+            'user_id'=>$this->user1->id,
+        ]);
+        $albumid = DB::table('albums')->select('id')->where('user_id', $this->user1->id)->first()->id;
+
+        $this->post('/share', [
+            'username' => $this->user2->name,
+            'album-id' => $albumid,
+        ]);
     }
 
     public function test_user_can_only_get_own_shared_albums()
     {
-        Auth::login($this->user1);
-        $this->post('/albums/create', [
-            'name'=>$this->album->name,
-            'description'=>$this->album->description,
-            'cover_image'=>$this->album->cover_image,
-            'user_id'=>$this->user1->id,
-        ]);
-        $this->post('/share', [
-            'username' => $this->user2->name
-        ]);
 
         Auth::logout();
-        Auth::login($this->user3);
+        Auth::login($this->user2);
 
-        $id = null;
-        $shares = DB::table('user_album_sharing')->get();
-        foreach ($shares as $share){
-            if($share->album_id == $this->album->id && $share->user_id == $this->user2->id){
-                $id = $share->id;
-            }
-        }
-        $response = $this->get('/sharedwithme/{$id}');
-        $response->assertDontSee($this->album->name);
+        $response = $this->get("/sharedwithme");
+        $response ->assertStatus(200);
+        $response->assertSee($this->album->name);
 
     }
 
     public function test_user_can_only_get_own_shared_photos()
     {
-        Auth::login($this->user1);
-        $this->post('/albums/create', [
-            'name'=>$this->album->name,
-            'description'=>$this->album->description,
-            'cover_image'=>$this->album->cover_image,
-            'user_id'=>$this->user1->id,
-        ]);
-        $this->post('/photos/create/$photo_id', [
-            'title'=>$this->photo->name,
-            'photo'=>$this->photo->image,
-            'size'=>5,
-            'description'=>$this->photo->name,
-            'album_id'=>$this->album->id,
-
-        ]);
-        $this->post('/share', [
-            'username' => $this->user2->name
-        ]);
-
         Auth::logout();
-        Auth::login($this->user3);
-
-        $response = $this->get('/shared_photos/'.$this->photo->id);
-        $response->assertDontSee($this->photo->title);
-    }
-
-    public function test_user_can_only_comment_own_shared_photos()
-    {
         Auth::login($this->user1);
-        $this->post('/albums/create', [
-            'name'=>$this->album->name,
-            'description'=>$this->album->description,
-            'cover_image'=>$this->album->cover_image,
-            'user_id'=>$this->user1->id,
-        ]);
-        $this->post('/photos/create/$photo_id', [
-            'title'=>$this->photo->name,
-            'photo'=>$this->photo->image,
-            'size'=>5,
-            'description'=>$this->photo->name,
-            'album_id'=>$this->album->id,
 
-        ]);
-        $this->post('/share', [
-            'username' => $this->user2->name
-        ]);
+        $file= UploadedFile::fake()->image('image.jpg');
 
-        Auth::logout();
-        Auth::login($this->user3);
+        $albumid = DB::table('albums')->select('id')->where('user_id', $this->user1->id)->first()->id;
 
-        $comment = "asd";
-        $this->post('/comment_user', [
-            'comment'=>$comment,
-            'photo_id'=>$this->photo->id
+        $this->post('/photos/store', [
+            'title'=>$this->photo->title,
+            'description'=>$this->photo->description,
+            'photo'=> $file,
+            'album-id' => $albumid
         ]);
 
         Auth::logout();
         Auth::login($this->user2);
-        $response = $this->get('/shared_photos/'.$this->photo->id);
+        $photoid = DB::table('photos')->select('id')->where('album_id', $albumid)->first()->id;
+
+        $response = $this->get('/shared_photos/'.$photoid);
+        $response->assertSee($this->photo->title);
+    }
+
+    public function test_user_can_only_comment_own_shared_photos()
+    {
+        Auth::logout();
+        Auth::login($this->user1);
+
+        $file= UploadedFile::fake()->image('image.jpg');
+
+        $albumid = DB::table('albums')->select('id')->where('user_id', $this->user1->id)->first()->id;
+
+        $this->post('/photos/store', [
+            'title'=>$this->photo->title,
+            'description'=>$this->photo->description,
+            'photo'=> $file,
+            'album-id' => $albumid
+        ]);
+
+        Auth::logout();
+        Auth::login($this->user3);
+        $photoid = DB::table('photos')->select('id')->where('album_id', $albumid)->first()->id;
+
+        $comment = "asd";
+        $this->post('/comment_user', [
+            'comment'=>$comment,
+            'photo_id'=>$photoid
+        ]);
+
+        Auth::logout();
+        Auth::login($this->user2);
+        $response = $this->get('/shared_photos/'.$photoid);
         $response->assertDontSee($comment);
     }
 }
