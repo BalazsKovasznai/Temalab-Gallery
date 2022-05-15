@@ -20,7 +20,7 @@ class LoginButtonRedirectDashboardTest extends DuskTestCase
             $this->browse(function ($browser) {
 
 
-                $browser->logout(1)
+                $browser->logout()
                     ->visit('/login')
                     ->type('email','kovasznaibalazs@gmail.com')
                     ->type('password', '12345678')

@@ -16,35 +16,36 @@ class NewPhotoSubmitButtonTest extends DuskTestCase
     public function test_with_empty_fields()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(1);
-            $browser->visit('/photos/create/1')
-                    ->press('@Submit')
-                ->assertPathIs('/photos/create/1');
+            $user=\App\Models\User::factory()->create();
+            $browser->loginAs($user->id)
+                ->visit('/dashboard')
+                ->clickLink('Create an Album')
+                ->type('name', 'name')
+                ->type('description', 'description')
+                ->press('@Submit')
+                ->press('@albumviewbutton')
+                ->press('@uploadphotobutton')
+                ->press('@Submit')
+                ->assertSee('The title field is required.')
+                ->assertSee('The description field is required.')
+                ->assertSee('The photo field is required.')
+            ;
         });
     }
 
-    public function test_with_filled_fields()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(1);
-            $browser->visit('/photos/create/1')
-                ->type('title', 'asd')
-                ->type('description', 'asd')
-                ->press('@Submit')
-                ->assertSee('The photo field is required');
-        });
-    }
+
 
     public function test_with_completely_filled()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(1);
-            $browser->visit('/photos/create/1')
+
+            $browser
                 ->type('title', 'asd')
                 ->type('description', 'asd')
                 ->attach('photo', 'C:\Fotók\_GP_2672-kicsi.jpg')
                 ->press('@Submit')
-                ->assertPathIs('/albums/1');
+                ->assertSee('Photo created successfully!')
+                ;
         });
     }
 

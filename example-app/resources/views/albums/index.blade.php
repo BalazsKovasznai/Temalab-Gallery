@@ -18,8 +18,8 @@
                                         <p class="card-text">{{$album->desciption}}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <a href="{{route('album-show',$album->id)}}" class="btn btn-sm btn-outline-secondary">View</a>
-                                                <a href="{{route('album-share-create',$album->id)}}" class="btn btn-sm btn-outline-secondary" id="button_share_album"  }>
+                                                <a href="{{route('album-show',$album->id)}}" class="btn btn-sm btn-outline-secondary" dusk="albumviewbutton">View</a>
+                                                <a href="{{route('album-share-create',$album->id)}}" class="btn btn-sm btn-outline-secondary" id="button_share_album"  } dusk="albumindexsharebutton">
                                                     Share
                                                 </a>
                                             </div>

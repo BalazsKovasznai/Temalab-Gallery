@@ -17,9 +17,10 @@ class FolderButtonRedirectTest extends DuskTestCase
     public function testExample()
     {
         $this->browse(function ($browser) {
-            $browser->loginAs(1)
+            $user=\App\Models\User::factory()->create();
+            $browser->loginAs($user->id)
                 ->visit('/dashboard')
-             ->clickLink('My Albums')
+                ->clickLink('My Albums')
                 ->assertPathIs('/albums');
 
 

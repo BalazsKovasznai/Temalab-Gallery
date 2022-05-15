@@ -16,13 +16,18 @@ class DeleteAlbumTest extends DuskTestCase
     public function testExample()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(13);
-            $album = \App\Models\Album::factory()->create();
-            $browser->visit('/albums/create')
-                ->type('name', '1')
-                ->type('description', 'hello')
-                ->press('Submit')
-                ->assertPathIs('/home');
+            $user=\App\Models\User::factory()->create();
+            $browser->loginAs($user->id)
+                ->visit('/dashboard')
+                ->clickLink('Create an Album')
+                ->type('name', 'albumtobedeleted')
+                ->type('description', 'description')
+                ->press('@Submit')
+                ->press('@albumviewbutton')
+                ->press('@deletealbumbutton')
+                ->assertSee('Album deleted successfully')
+                ->assertDontSee('albumtobedeleted')
+            ;
         });
     }
 }

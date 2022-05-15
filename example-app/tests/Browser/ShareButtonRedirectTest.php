@@ -9,6 +9,17 @@ use Tests\DuskTestCase;
 
 class ShareButtonRedirectTest extends DuskTestCase
 {
+    private $user1;
+    private $user2;
+    public function setUp() :void
+    {
+        parent::setUp();
+        $this->user1 = User::factory()->create();
+        $this->user2 = User::factory()->create();
+
+
+
+    }
     /**
      * A Dusk test example.
      *
@@ -17,49 +28,36 @@ class ShareButtonRedirectTest extends DuskTestCase
     public function test_with_empty_username_field()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(1)
-                ->visit('/albums/1/share/')
-                ->press('Share')
-                ->assertPathIs('/albums/1/share/')
-                ->assertSee('Please enter a username');
-        });
-    }
-    public function test_with_existing_username()
-    {
-        $this->browse(function (Browser $browser) {
-
-            $browser->loginAs(1)
-                ->visit('/albums/1/share/')
-                ->type('username', 'balazs')
-                ->press('Share')
-                ->assertPathIs('/albums/share/store');
+            $browser->loginAs($this->user2->id)
+                ->logout($this->user2)
+                ->loginAs($this->user1->id)
+                ->visit('/dashboard')
+                ->clickLink('Create an Album')
+                ->type('name', 'name')
+                ->type('description', 'description')
+                ->press('@Submit')
+                ->press('@albumindexsharebutton')
+                ->assertSee('User to share');
         });
     }
     public function test_with_nonexistent_username()
     {
         $this->browse(function (Browser $browser) {
-            $username = $this->generateRandomString(12);
-            while($this->usernameExist($username)){
-                $username = $this->generateRandomString(12);
-            }
-            $browser->loginAs(1)
-                ->visit('/albums/1/share/')
-                ->type('username', $username)
+            $browser
+                ->type('username', 'nonexistentuser')
                 ->press('@Share')
-                ->assertPathIs('/albums/1/share/')
-                ->assertSee("This username doesn't exist");
+                ->assertSee('The selected username is invalid');
         });
     }
-    private function usernameExist(String $username){
-        $users = User::get();
-        foreach($users as $user){
-            if($user->name == $username){
-                return true;
-            }
-        }
-        return false;
+    public function test_with_existing_username()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser
+                ->type('username', $this->user2->name)
+                ->press('@Share')
+                ->assertSee('Sharing created successfully!');
+        });
     }
-    private function generateRandomString($length = 10) {
-        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
-    }
+
+
 }

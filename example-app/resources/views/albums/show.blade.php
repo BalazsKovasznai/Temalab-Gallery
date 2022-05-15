@@ -20,13 +20,13 @@
                                     <h2 class="fw-light">{{$album->name}}</h2>
                                     <p class="lead text-muted">{{$album->description}}</p>
                                     <div class="button-group flex items-center justify-center">
-                                        <a href="{{ route('photo-create',$album->id ) }}" class="btn btn-primary ">Upload Photo</a>
+                                        <a href="{{ route('photo-create',$album->id ) }}" class="btn btn-primary "dusk="uploadphotobutton">Upload Photo</a>
                                         <a href="/albums" class="btn btn-secondary ">Go Back</a>
                                         <a href="{{ route('album-share-list',$album->id ) }}" class="btn btn-primary ">Shared with</a>
                                     <form action="{{route('album-destroy',$album->id)}}" method="post" class="d-flex justify-center">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" name="button" class="btn btn-danger float-right">Delete album</button>
+                                        <button type="submit" name="button" class="btn btn-danger float-right" dusk="deletealbumbutton">Delete album</button>
                                     </form>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                 <p class="card-text">{{$photo->desciption}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a href="{{route('photo-show',$photo->id)}}" class="btn btn-sm btn-outline-secondary">View</a>
+                                        <a href="{{route('photo-show',$photo->id)}}" class="btn btn-sm btn-outline-secondary" dusk="photoview">View</a>
                                     </div>
                                     <small class="text-muted">{{$photo->title}}</small>
                                 </div>
