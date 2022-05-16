@@ -23,7 +23,7 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($users as $user)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"> <span class="table-row-margin">{{ $user->name }}</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"> <div class="px-6">{{ $user->name }}</div></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <form action="{{ route('sharing-destroy', $albumid) }}" method="POST">
                                         <input type="hidden" value="{{$user->id}}" name="user_id">
