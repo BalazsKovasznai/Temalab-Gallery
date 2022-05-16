@@ -598,7 +598,12 @@ select {
 .container {
   width: 100%;
 }
+
 @media (min-width: 640px) {
+
+    .min-w-400{
+        min-width: 400px;
+    }
 
   .container {
     max-width: 640px;
@@ -850,6 +855,9 @@ select {
   margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
+.min-w-150{
+    min-width: 150px;
+}
 .overflow-hidden {
   overflow: hidden;
 }
@@ -961,7 +969,10 @@ select {
     margin-top: 0.6rem;
     margin-bottom: 0.6rem;
 }
-
+.table-row-margin{
+    margin-left:2rem;
+    margin-rigth:2rem;
+}
 .fill-current {
   fill: currentColor;
 }
@@ -1411,6 +1422,7 @@ select {
 }
 @media (min-width: 640px) {
 
+
   .sm\:-my-px {
     margin-top: -1px;
     margin-bottom: -1px;
@@ -1510,5 +1522,6 @@ select {
     padding-right: 2rem;
   }
 }
+
 
 
