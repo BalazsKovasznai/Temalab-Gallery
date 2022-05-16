@@ -11,8 +11,8 @@
             <div class="row" >
                 @foreach($albums as $album)
                 <div class="col" >
-                    <div class="card shadow-sm">
-                        <img src="/storage/album_covers/{{ $album->cover_image }}" alt="{{ $album->cover_image }}" height="300" width="300">
+                    <div class="card shadow-sm m-2" style="width: 18rem; height:17rem">
+                        <img src="/storage/album_covers/{{ $album->cover_image }}" alt="{{ $album->cover_image }}" class="card-img-top cover-image">
                         <div class="card-body">
                             <p class="card-text">{{$album->desciption}}</p>
                             <div class="d-flex justify-content-between align-items-center">

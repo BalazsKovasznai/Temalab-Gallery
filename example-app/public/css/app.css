@@ -969,6 +969,11 @@ select {
 .fit-width {
     width: fit-content;
 }
+.cover-image{
+    width: 18rem; /* width of container */
+    height: 12rem; /* height of container */
+    object-fit: cover;
+}
 
 .p-2 {
   padding: 0.5rem;

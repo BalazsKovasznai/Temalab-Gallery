@@ -12,8 +12,8 @@
                     @foreach($albums as $album)
                         @if($album->user_id==auth()->id())
                             <div class="col" >
-                                <div class="card shadow-sm m-2 ">
-                                    <img alt="No cover image" class="card-img-top img-fluid" src="/storage/album_covers/{{ $album->cover_image }}" style="width: 18rem; height: 20rem;" />
+                                <div class="card shadow-sm m-2" style="width: 18rem; height:17rem">
+                                    <img alt="No cover image" class="card-img-top cover-image" src="/storage/album_covers/{{ $album->cover_image }}"/>
                                     <div class="card-body">
                                         <p class="card-text">{{$album->desciption}}</p>
                                         <div class="d-flex justify-content-between align-items-center">
