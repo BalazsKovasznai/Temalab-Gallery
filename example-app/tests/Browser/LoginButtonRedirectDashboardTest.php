@@ -18,15 +18,16 @@ class LoginButtonRedirectDashboardTest extends DuskTestCase
     {
         {
             $this->browse(function ($browser) {
-                $user=\App\Models\User::factory()->create();
+                $user = User::factory()->create([
+                    'email' => 'test@laravel.com',
+                ]);
+                $browser->logout()->visit('/login')
+                    ->type('email', $user->email)
+                    ->type('password', 'password')
+                    ->press('@loginbutton')
+                    ->assertPathIs('/dashboard');
 
-
-                 $browser->loginAs($user->id)
-                     ->visit('/dashboard')
-                     ->assertSee("You're logged in!");
-
-
-
+                $user->delete();
             });
         }
     }
